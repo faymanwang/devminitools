@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Compare text and code online with syntax highlighting, whitespace and case options, synchronized scrolling and local file upload. Data stays in your browser.">
+    <title>Code Diff Tool - Compare Text and Code Online</title>
+    <link rel="canonical" href="https://faymanwang.github.io/devminitools/en/diff.html">
+    <link rel="alternate" hreflang="zh-CN" href="https://faymanwang.github.io/devminitools/diff.html">
+    <link rel="alternate" hreflang="en" href="https://faymanwang.github.io/devminitools/en/diff.html">
+    <link rel="alternate" hreflang="x-default" href="https://faymanwang.github.io/devminitools/diff.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="DevMiniTools">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:locale:alternate" content="zh_CN">
+    <meta property="og:title" content="Code Diff Tool - Compare Text and Code Online">
+    <meta property="og:description" content="Compare text and code online with syntax highlighting, whitespace and case options, synchronized scrolling and local file upload. Data stays in your browser.">
+    <meta property="og:url" content="https://faymanwang.github.io/devminitools/en/diff.html">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Code Diff Tool - Compare Text and Code Online">
+    <meta name="twitter:description" content="Compare text and code online with syntax highlighting, whitespace and case options, synchronized scrolling and local file upload. Data stays in your browser.">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Online Code Diff Tool",
+      "url": "https://faymanwang.github.io/devminitools/en/diff.html",
+      "description": "Compare text and code online with syntax highlighting, whitespace and case options, synchronized scrolling and local file upload. Data stays in your browser.",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Any",
+      "browserRequirements": "Requires JavaScript and a modern web browser",
+      "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+    </script>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../vendor/highlight/atom-one-dark.min.css">
+</head>
+<body class="tool-page">
+    <header class="site-header">
+        <a href="index.html" class="brand" aria-label="DevMiniTools home">
+            <span class="brand-dev">Dev</span><span class="brand-name">MiniTools</span>
+        </a>
+        <nav class="site-nav" aria-label="Tool navigation">
+            <div class="nav-item">
+                <span class="nav-label" tabindex="0">JSON</span>
+                <div class="nav-dropdown">
+                    <a href="json-format.html">JSON Formatter</a>
+                    <a href="convert.html">JSON Converter</a>
+                </div>
+            </div>
+            <div class="nav-item">
+                <span class="nav-label" tabindex="0">Images</span>
+                <div class="nav-dropdown">
+                    <a href="image-compress.html">Image Compressor</a>
+                    <a href="image-convert.html">Image Converter</a>
+                    <a href="image-gif.html">Images to GIF</a>
+                </div>
+            </div>
+            <div class="nav-item">
+                <span class="nav-label" tabindex="0">Developer</span>
+                <div class="nav-dropdown">
+                    <a href="diff.html">Code Diff</a>
+                    <a href="color-convert.html">Color Converter</a>
+                    <a href="user-agent.html">User-Agent Parser</a>
+                    <a href="ip-lookup.html">IP Address</a>
+                </div>
+            </div>
+            <div class="nav-item">
+                <span class="nav-label" tabindex="0">Text</span>
+                <div class="nav-dropdown">
+                    <a href="markdown-preview.html">Markdown Preview</a>
+                    <a href="line-tools.html">Line Tools</a>
+                </div>
+            </div>
+        </nav>
+        <div class="language-switch" aria-label="Language selection"><a href="../diff.html" lang="zh-CN" hreflang="zh-CN">中文</a><span aria-current="page">EN</span></div>
+        <span class="header-note">Data is processed locally in your browser and is never uploaded</span>
+    </header>
+
+    <main class="tool-shell">
+        <h1 class="page-title">Online Code Diff Tool</h1>
+        <section class="utility-workbench">
+            <div class="diff-controls">
+                <div class="control-group">
+                    <label for="language-select">Code Language</label>
+                    <select id="language-select">
+                        <option value="plaintext">Plain Text</option>
+                        <option value="javascript" selected>JavaScript</option>
+                        <option value="python">Python</option>
+                        <option value="java">Java</option>
+                        <option value="cpp">C++</option>
+                        <option value="c">C</option>
+                        <option value="css">CSS</option>
+                        <option value="html">HTML</option>
+                        <option value="xml">XML</option>
+                        <option value="json">JSON</option>
+                        <option value="sql">SQL</option>
+                        <option value="bash">Bash</option>
+                        <option value="go">Go</option>
+                        <option value="rust">Rust</option>
+                        <option value="php">PHP</option>
+                        <option value="ruby">Ruby</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <label><input type="checkbox" id="ignore-whitespace" checked> Ignore whitespace</label>
+                </div>
+                <div class="control-group">
+                    <label><input type="checkbox" id="ignore-case"> Ignore case</label>
+                </div>
+                <div class="control-group">
+                    <label><input type="checkbox" id="sync-scroll" checked> Sync scrolling</label>
+                </div>
+                <div class="control-group">
+                    <button class="primary" id="compare-btn">Compare</button>
+                    <button class="secondary" id="sample-btn">Sample</button>
+                    <button class="secondary" id="clear-btn">Clear</button>
+                </div>
+            </div>
+
+            <div class="diff-stats" id="diff-stats" style="display: none;">
+                <span class="stat-item"><span class="stat-label">Added</span><span class="stat-value added" id="stat-added">0</span></span>
+                <span class="stat-item"><span class="stat-label">Removed</span><span class="stat-value removed" id="stat-removed">0</span></span>
+                <span class="stat-item"><span class="stat-label">Changed</span><span class="stat-value changed" id="stat-changed">0</span></span>
+                <span class="stat-item"><span class="stat-label">Unchanged</span><span class="stat-value unchanged" id="stat-unchanged">0</span></span>
+            </div>
+
+            <div class="diff-container">
+                <div class="diff-panel">
+                    <div class="panel-header">
+                        <h3>Original Code</h3>
+                        <div>
+                            <button class="copy-panel-btn" data-panel="original" title="Copy">Copy</button>
+                            <button class="upload-btn" data-panel="original" title="Upload file">
+                                <input type="file" class="file-input" data-panel="original" accept=".txt,.js,.py,.java,.cpp,.c,.css,.html,.xml,.json,.sql,.sh,.go,.rs,.php,.rb">
+                                Upload
+                            </button>
+                        </div>
+                    </div>
+                    <div class="panel-content">
+                        <textarea id="code-original" class="code-input" spellcheck="false" placeholder="Enter or paste the original code here..."></textarea>
+                        <div class="diff-viewer" id="diff-viewer-original"></div>
+                    </div>
+                </div>
+
+                <div class="diff-panel">
+                    <div class="panel-header">
+                        <h3>Compared Code</h3>
+                        <div>
+                            <button class="copy-panel-btn" data-panel="modified" title="Copy">Copy</button>
+                            <button class="upload-btn" data-panel="modified" title="Upload file">
+                                <input type="file" class="file-input" data-panel="modified" accept=".txt,.js,.py,.java,.cpp,.c,.css,.html,.xml,.json,.sql,.sh,.go,.rs,.php,.rb">
+                                Upload
+                            </button>
+                        </div>
+                    </div>
+                    <div class="panel-content">
+                        <textarea id="code-modified" class="code-input" spellcheck="false" placeholder="Enter or paste the code to compare here..."></textarea>
+                        <div class="diff-viewer" id="diff-viewer-modified"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="json-message">Double-click a diff result to return to editing. All comparisons happen locally in your browser.</div>
+        </section>
+
+        <section class="section-block seo-content">
+            <h2>Compare Code and Text Differences Online</h2>
+            <p>Compare API responses, configuration files, scripts and plain text. Input is never uploaded; file reading and diff calculation happen locally in your browser.</p>
+            <div class="related-tools">
+                <a href="json-format.html">JSON Formatter</a>
+                <a href="convert.html">JSON Converter</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-links">
+            <a href="https://github.com/devminitools" target="_blank" rel="noopener">GitHub</a>
+        </div>
+    </footer>
+
+    <script src="../js/i18n.js"></script>
+    <script src="../vendor/highlight/highlight.min.js"></script>
+    <script src="../js/diff.js"></script>
+</body>
+</html>

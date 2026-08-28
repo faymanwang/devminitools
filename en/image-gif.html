@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Create an animated GIF from multiple PNG, JPEG, WebP or AVIF images. Reorder frames, set timing and size, then export locally in your browser.">
+    <title>Images to GIF - Create an Animated GIF Online</title>
+    <link rel="canonical" href="https://faymanwang.github.io/devminitools/en/image-gif.html">
+    <link rel="alternate" hreflang="zh-CN" href="https://faymanwang.github.io/devminitools/image-gif.html">
+    <link rel="alternate" hreflang="en" href="https://faymanwang.github.io/devminitools/en/image-gif.html">
+    <link rel="alternate" hreflang="x-default" href="https://faymanwang.github.io/devminitools/image-gif.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="DevMiniTools">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:locale:alternate" content="zh_CN">
+    <meta property="og:title" content="Images to GIF - Create an Animated GIF Online">
+    <meta property="og:description" content="Create an animated GIF from multiple PNG, JPEG, WebP or AVIF images. Reorder frames, set timing and size, then export locally in your browser.">
+    <meta property="og:url" content="https://faymanwang.github.io/devminitools/en/image-gif.html">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Images to GIF - Create an Animated GIF Online">
+    <meta name="twitter:description" content="Create an animated GIF from multiple PNG, JPEG, WebP or AVIF images. Reorder frames, set timing and size, then export locally in your browser.">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Online Images to GIF Maker",
+      "url": "https://faymanwang.github.io/devminitools/en/image-gif.html",
+      "description": "Create an animated GIF from multiple PNG, JPEG, WebP or AVIF images. Reorder frames, set timing and size, then export locally in your browser.",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Any",
+      "browserRequirements": "Requires JavaScript and a modern web browser",
+      "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+    </script>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="tool-page">
+    <header class="site-header">
+        <a href="index.html" class="brand" aria-label="DevMiniTools home">
+            <span class="brand-dev">Dev</span><span class="brand-name">MiniTools</span>
+        </a>
+        <nav class="site-nav" aria-label="Tool navigation">
+            <div class="nav-item">
+                <span class="nav-label" tabindex="0">JSON</span>
+                <div class="nav-dropdown">
+                    <a href="json-format.html">JSON Formatter</a>
+                    <a href="convert.html">JSON Converter</a>
+                </div>
+            </div>
+            <div class="nav-item">
+                <span class="nav-label" tabindex="0">Images</span>
+                <div class="nav-dropdown">
+                    <a href="image-compress.html">Image Compressor</a>
+                    <a href="image-convert.html">Image Converter</a>
+                    <a href="image-gif.html">Images to GIF</a>
+                </div>
+            </div>
+            <div class="nav-item">
+                <span class="nav-label" tabindex="0">Developer</span>
+                <div class="nav-dropdown">
+                    <a href="diff.html">Code Diff</a>
+                    <a href="color-convert.html">Color Converter</a>
+                    <a href="user-agent.html">User-Agent Parser</a>
+                    <a href="ip-lookup.html">IP Address</a>
+                </div>
+            </div>
+            <div class="nav-item">
+                <span class="nav-label" tabindex="0">Text</span>
+                <div class="nav-dropdown">
+                    <a href="markdown-preview.html">Markdown Preview</a>
+                    <a href="line-tools.html">Line Tools</a>
+                </div>
+            </div>
+        </nav>
+        <div class="language-switch" aria-label="Language selection"><a href="../image-gif.html" lang="zh-CN" hreflang="zh-CN">中文</a><span aria-current="page">EN</span></div>
+        <span class="header-note">Data is processed locally in your browser and is never uploaded</span>
+    </header>
+
+    <main class="tool-shell">
+        <h1 class="page-title">Online Images to GIF Maker</h1>
+        <section class="utility-workbench">
+            <div class="utility-grid image-compress-layout">
+                <article class="utility-panel">
+                    <h2>GIF Settings</h2>
+                    <label for="gif-files">Choose Image</label>
+                    <div id="gif-drop-zone" class="image-drop-zone">
+                        <input id="gif-files" type="file" accept="image/jpeg,image/png,image/webp,image/avif" multiple>
+                        <strong>Click to choose or drop multiple images</strong>
+                        <span>Supports JPEG, PNG, WebP and AVIF. Select at least two images.</span>
+                    </div>
+                    <div class="option-row"><label for="gif-delay">Frame Duration</label><select id="gif-delay"><option value="100">100 ms</option><option value="250">250 ms</option><option value="500" selected>500 ms</option><option value="1000">1 second</option><option value="2000">2 seconds</option><option value="custom">Custom</option></select><div id="gif-delay-custom" class="gif-delay-custom is-hidden"><label for="gif-delay-custom-value">Custom</label><input id="gif-delay-custom-value" type="number" min="10" max="60000" step="10" value="500" inputmode="numeric" aria-label="Custom frame duration in milliseconds"><span>ms</span></div></div>
+                    <div class="option-row"><label for="gif-size">Output Dimensions</label><select id="gif-size"><option value="source" selected>First-frame size</option><option value="1280">Long edge 1280 px</option><option value="1024">Long edge 1024 px</option><option value="768">Long edge 768 px</option><option value="512">Long edge 512 px</option></select></div>
+                    <div class="option-row"><label for="gif-quality">Encoding Quality</label><select id="gif-quality"><option value="1">High quality (slower)</option><option value="10" selected>Balanced</option><option value="20">Smaller file</option></select></div>
+                    <label class="checkbox-label" for="gif-loop"><input id="gif-loop" type="checkbox" checked> Loop animation</label>
+                    <div class="button-group compact"><button id="gif-create-btn" class="primary" disabled>Create GIF</button><button id="gif-download-btn" class="secondary" disabled>Download GIF</button><button id="gif-reset-btn" class="secondary">Reset</button></div>
+                    <div id="gif-message" class="json-message">Select at least two images to create a GIF.</div>
+                </article>
+
+                <article class="utility-panel wide-panel">
+                    <h2>Frame Sequence</h2>
+                    <div class="metric-grid image-metric-grid gif-metric-grid"><div class="metric-card"><span>Image Count</span><strong id="gif-frame-count">0</strong></div><div class="metric-card"><span>Output Dimensions</span><strong id="gif-output-dimension">-</strong></div><div class="metric-card"><span>GIF Size</span><strong id="gif-output-size">-</strong></div></div>
+                    <div id="gif-frame-list" class="gif-frame-list" aria-live="polite"><p class="muted">Images play in the order shown here. Use each frame’s controls to reorder or remove it.</p></div>
+                    <div class="gif-result"><label>GIF Preview</label><div id="gif-preview" class="image-preview image-local-preview"><span>The GIF preview will appear after generation.</span></div></div>
+                </article>
+            </div>
+        </section>
+
+        <section class="section-block seo-content">
+            <h2>Create an Animated GIF Online</h2>
+            <p>Images are decoded, drawn and encoded in your browser and are never sent to a server. For stable performance, use similarly sized images; large images or many frames require more CPU and memory.</p>
+            <div class="related-tools"><a href="image-compress.html">Image Compressor</a><a href="image-convert.html">Image Converter</a></div>
+        </section>
+    </main>
+    <footer class="site-footer">
+        <div class="footer-links">
+            <a href="https://github.com/devminitools" target="_blank" rel="noopener">GitHub</a>
+        </div>
+    </footer>
+    <script src="../js/i18n.js"></script>
+    <script src="../vendor/gif.js/gif.js"></script>
+    <script src="../js/image-gif.js"></script>
+</body>
+</html>

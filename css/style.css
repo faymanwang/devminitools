@@ -746,16 +746,55 @@ body.tool-page {
 
 .header-note {
     display: inline-block;
-    margin-left: auto;
+    margin-left: 18px;
     vertical-align: middle;
     color: #2563eb;
     font-size: 14px;
 }
 
-@media (max-width: 640px) {
-    .header-note {
-        display: none;
-    }
+.language-switch {
+    display: inline-flex;
+    align-items: center;
+    flex: 0 0 auto;
+    gap: 2px;
+    margin-left: auto;
+    padding: 3px;
+    border: 1px solid #d0d5dd;
+    border-radius: 7px;
+    background: #f8fafc;
+    white-space: nowrap;
+}
+
+.language-switch a,
+.language-switch span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 34px;
+    min-height: 28px;
+    padding: 0 8px;
+    border-radius: 5px;
+    color: #475467;
+    font-size: 13px;
+    font-weight: 650;
+    line-height: 1;
+    text-decoration: none;
+}
+
+.language-switch span[aria-current="page"] {
+    color: #175cd3;
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.12);
+}
+
+.language-switch a:hover {
+    color: #175cd3;
+    background: #eff6ff;
+}
+
+.language-switch a:focus-visible {
+    outline: 2px solid #2563eb;
+    outline-offset: 1px;
 }
 
 
@@ -895,6 +934,15 @@ body.tool-page {
     max-width: none;
     margin: 0 auto;
     padding: 14px 16px 0;
+}
+
+.page-title {
+    margin: 2px 0 14px;
+    color: #172033;
+    font-size: 22px;
+    font-weight: 750;
+    line-height: 1.3;
+    letter-spacing: -0.25px;
 }
 
 .hero-panel,
@@ -2225,6 +2273,32 @@ body.tool-page {
     .gif-frame-item { grid-template-columns: 54px minmax(0, 1fr); }
     .gif-frame-item img { width: 54px; }
     .gif-frame-actions { grid-column: 1 / -1; }
+}
+
+@media (max-width: 900px) {
+    .site-nav,
+    .header-note {
+        display: none;
+    }
+
+    .language-switch {
+        margin-left: auto;
+    }
+}
+
+@media (max-width: 640px) {
+    .language-switch a,
+    .language-switch span {
+        min-width: 32px;
+        min-height: 26px;
+        padding: 0 7px;
+        font-size: 12px;
+    }
+
+    .page-title {
+        margin-bottom: 12px;
+        font-size: 19px;
+    }
 }
 
 /* 浅色代码高亮（覆盖 atom-one-dark 深色主题，pre 前缀提升优先级） */

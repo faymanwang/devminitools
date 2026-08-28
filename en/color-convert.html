@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Convert colors between HEX, RGB and HSL online, generate CSS color values and preview the result. All processing stays in your browser.">
+    <title>Color Converter - Convert HEX, RGB and HSL Online</title>
+    <link rel="canonical" href="https://faymanwang.github.io/devminitools/en/color-convert.html">
+    <link rel="alternate" hreflang="zh-CN" href="https://faymanwang.github.io/devminitools/color-convert.html">
+    <link rel="alternate" hreflang="en" href="https://faymanwang.github.io/devminitools/en/color-convert.html">
+    <link rel="alternate" hreflang="x-default" href="https://faymanwang.github.io/devminitools/color-convert.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="DevMiniTools">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:locale:alternate" content="zh_CN">
+    <meta property="og:title" content="Color Converter - Convert HEX, RGB and HSL Online">
+    <meta property="og:description" content="Convert colors between HEX, RGB and HSL online, generate CSS color values and preview the result. All processing stays in your browser.">
+    <meta property="og:url" content="https://faymanwang.github.io/devminitools/en/color-convert.html">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Color Converter - Convert HEX, RGB and HSL Online">
+    <meta name="twitter:description" content="Convert colors between HEX, RGB and HSL online, generate CSS color values and preview the result. All processing stays in your browser.">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Online Color Converter",
+      "url": "https://faymanwang.github.io/devminitools/en/color-convert.html",
+      "description": "Convert colors between HEX, RGB and HSL online, generate CSS color values and preview the result. All processing stays in your browser.",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Any",
+      "browserRequirements": "Requires JavaScript and a modern web browser",
+      "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+    </script>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="tool-page">
+    <header class="site-header">
+        <a href="index.html" class="brand" aria-label="DevMiniTools home">
+            <span class="brand-dev">Dev</span><span class="brand-name">MiniTools</span>
+        </a>
+        <nav class="site-nav" aria-label="Tool navigation">
+            <div class="nav-item">
+                <span class="nav-label" tabindex="0">JSON</span>
+                <div class="nav-dropdown">
+                    <a href="json-format.html">JSON Formatter</a>
+                    <a href="convert.html">JSON Converter</a>
+                </div>
+            </div>
+            <div class="nav-item">
+                <span class="nav-label" tabindex="0">Images</span>
+                <div class="nav-dropdown">
+                    <a href="image-compress.html">Image Compressor</a>
+                    <a href="image-convert.html">Image Converter</a>
+                    <a href="image-gif.html">Images to GIF</a>
+                </div>
+            </div>
+            <div class="nav-item">
+                <span class="nav-label" tabindex="0">Developer</span>
+                <div class="nav-dropdown">
+                    <a href="diff.html">Code Diff</a>
+                    <a href="color-convert.html">Color Converter</a>
+                    <a href="user-agent.html">User-Agent Parser</a>
+                    <a href="ip-lookup.html">IP Address</a>
+                </div>
+            </div>
+            <div class="nav-item">
+                <span class="nav-label" tabindex="0">Text</span>
+                <div class="nav-dropdown">
+                    <a href="markdown-preview.html">Markdown Preview</a>
+                    <a href="line-tools.html">Line Tools</a>
+                </div>
+            </div>
+        </nav>
+        <div class="language-switch" aria-label="Language selection"><a href="../color-convert.html" lang="zh-CN" hreflang="zh-CN">中文</a><span aria-current="page">EN</span></div>
+        <span class="header-note">Data is processed locally in your browser and is never uploaded</span>
+    </header>
+
+    <main class="tool-shell">
+        <h1 class="page-title">Online Color Converter</h1>
+        <section class="utility-workbench">
+            <div class="utility-grid two-column">
+                <article class="utility-panel">
+                    <h2>Input Color</h2>
+                    <textarea id="color-input" class="utility-textarea" spellcheck="false" placeholder="#1677ff, rgb(22, 119, 255), or hsl(215, 100%, 54%)"></textarea>
+                    <div class="button-group compact">
+                        <button id="color-convert-btn" class="primary">Convert</button>
+                        <button id="color-sample-btn" class="secondary">Sample</button>
+                        <button id="color-clear-btn" class="secondary">Clear</button>
+                    </div>
+                </article>
+
+                <article class="utility-panel">
+                    <h2>Conversion Result</h2>
+                    <div id="color-preview" style="height: 56px; border-radius: 8px; border: 1px solid #e6eaf2; background: #fff;"></div>
+                    <div class="result-list">
+                        <div class="result-row"><span>HEX</span><strong id="color-hex-result">-</strong></div>
+                        <div class="result-row"><span>RGB</span><strong id="color-rgb-result">-</strong></div>
+                        <div class="result-row"><span>HSL</span><strong id="color-hsl-result">-</strong></div>
+                    </div>
+                    <div class="button-group compact">
+                        <button id="color-copy-btn" class="secondary">Copy Result</button>
+                    </div>
+                </article>
+            </div>
+            <div id="color-message" class="json-message">Waiting for a color value.</div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-links">
+            <a href="https://github.com/devminitools" target="_blank" rel="noopener">GitHub</a>
+        </div>
+    </footer>
+
+    <script src="../js/i18n.js"></script>
+    <script src="../js/color-convert.js"></script>
+</body>
+</html>

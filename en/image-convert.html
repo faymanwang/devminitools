@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Convert PNG, JPEG, WebP and AVIF images online to JPEG, PNG or WebP. Preview and download the result without uploading your images.">
+    <title>Image Converter - Convert PNG, JPEG and WebP Online</title>
+    <link rel="canonical" href="https://faymanwang.github.io/devminitools/en/image-convert.html">
+    <link rel="alternate" hreflang="zh-CN" href="https://faymanwang.github.io/devminitools/image-convert.html">
+    <link rel="alternate" hreflang="en" href="https://faymanwang.github.io/devminitools/en/image-convert.html">
+    <link rel="alternate" hreflang="x-default" href="https://faymanwang.github.io/devminitools/image-convert.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="DevMiniTools">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:locale:alternate" content="zh_CN">
+    <meta property="og:title" content="Image Converter - Convert PNG, JPEG and WebP Online">
+    <meta property="og:description" content="Convert PNG, JPEG, WebP and AVIF images online to JPEG, PNG or WebP. Preview and download the result without uploading your images.">
+    <meta property="og:url" content="https://faymanwang.github.io/devminitools/en/image-convert.html">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Image Converter - Convert PNG, JPEG and WebP Online">
+    <meta name="twitter:description" content="Convert PNG, JPEG, WebP and AVIF images online to JPEG, PNG or WebP. Preview and download the result without uploading your images.">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Online Image Converter",
+      "url": "https://faymanwang.github.io/devminitools/en/image-convert.html",
+      "description": "Convert PNG, JPEG, WebP and AVIF images online to JPEG, PNG or WebP. Preview and download the result without uploading your images.",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Any",
+      "browserRequirements": "Requires JavaScript and a modern web browser",
+      "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+    </script>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="tool-page">
+    <header class="site-header">
+        <a href="index.html" class="brand" aria-label="DevMiniTools home">
+            <span class="brand-dev">Dev</span><span class="brand-name">MiniTools</span>
+        </a>
+        <nav class="site-nav" aria-label="Tool navigation">
+            <div class="nav-item">
+                <span class="nav-label" tabindex="0">JSON</span>
+                <div class="nav-dropdown">
+                    <a href="json-format.html">JSON Formatter</a>
+                    <a href="convert.html">JSON Converter</a>
+                </div>
+            </div>
+            <div class="nav-item">
+                <span class="nav-label" tabindex="0">Images</span>
+                <div class="nav-dropdown">
+                    <a href="image-compress.html">Image Compressor</a>
+                    <a href="image-convert.html">Image Converter</a>
+                    <a href="image-gif.html">Images to GIF</a>
+                </div>
+            </div>
+            <div class="nav-item">
+                <span class="nav-label" tabindex="0">Developer</span>
+                <div class="nav-dropdown">
+                    <a href="diff.html">Code Diff</a>
+                    <a href="color-convert.html">Color Converter</a>
+                    <a href="user-agent.html">User-Agent Parser</a>
+                    <a href="ip-lookup.html">IP Address</a>
+                </div>
+            </div>
+            <div class="nav-item">
+                <span class="nav-label" tabindex="0">Text</span>
+                <div class="nav-dropdown">
+                    <a href="markdown-preview.html">Markdown Preview</a>
+                    <a href="line-tools.html">Line Tools</a>
+                </div>
+            </div>
+        </nav>
+        <div class="language-switch" aria-label="Language selection"><a href="../image-convert.html" lang="zh-CN" hreflang="zh-CN">中文</a><span aria-current="page">EN</span></div>
+        <span class="header-note">Data is processed locally in your browser and is never uploaded</span>
+    </header>
+
+    <main class="tool-shell">
+        <h1 class="page-title">Online Image Converter</h1>
+        <section class="utility-workbench">
+            <div class="utility-grid image-compress-layout">
+                <article class="utility-panel">
+                    <h2>Conversion Settings</h2>
+                    <label for="image-file">Choose Image</label>
+                    <div id="image-drop-zone" class="image-drop-zone">
+                        <input id="image-file" type="file" accept="image/jpeg,image/png,image/webp,image/avif">
+                        <strong>Click to choose or drop an image</strong>
+                        <span>Supports JPEG, PNG, WebP and AVIF. Download the converted result directly.</span>
+                    </div>
+
+                    <div class="option-row">
+                        <label for="image-output-format">Target Format</label>
+                        <select id="image-output-format">
+                            <option value="image/jpeg" selected>JPEG / JPG</option>
+                            <option value="image/png">PNG</option>
+                            <option value="image/webp">WebP</option>
+                        </select>
+                    </div>
+
+                    <label for="image-quality">Output quality: <span id="image-quality-value">92%</span></label>
+                    <input id="image-quality" class="image-quality-slider" type="range" min="1" max="100" value="92">
+
+                    <div class="button-group compact">
+                        <button id="image-convert-btn" class="primary">Convert Format</button>
+                        <button id="image-download-btn" class="secondary" disabled>Download Result</button>
+                        <button id="image-reset-btn" class="secondary">Reset</button>
+                    </div>
+                    <div id="image-convert-message" class="json-message">Waiting for an image.</div>
+                </article>
+
+                <article class="utility-panel wide-panel">
+                    <h2>Conversion Result</h2>
+                    <div class="metric-grid image-metric-grid">
+                        <div class="metric-card"><span>Original Format</span><strong id="image-original-format">-</strong></div>
+                        <div class="metric-card"><span>Target Format</span><strong id="image-output-format-text">-</strong></div>
+                        <div class="metric-card"><span>Original Size</span><strong id="image-original-size">-</strong></div>
+                        <div class="metric-card"><span>Converted</span><strong id="image-output-size">-</strong></div>
+                        <div class="metric-card"><span>Dimensions</span><strong id="image-output-dimension">-</strong></div>
+                    </div>
+
+                    <div class="image-preview-grid">
+                        <div>
+                            <label>Original Preview</label>
+                            <div id="image-original-preview" class="image-preview image-local-preview">
+                                <span>The original image will appear after selection.</span>
+                            </div>
+                        </div>
+                        <div>
+                            <label>Converted Preview</label>
+                            <div id="image-converted-preview" class="image-preview image-local-preview">
+                                <span>The converted result will appear here.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="muted">Transparent areas use a white background when converting to JPEG. PNG ignores the quality setting, while JPEG and WebP are re-encoded at the selected quality.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="section-block seo-content">
+            <h2>Convert Image Formats Online</h2>
+            <p>This tool decodes and re-encodes images locally with the browser Canvas API. Convert transparent PNG files to JPEG, photos to WebP, or adapt an image to upload restrictions.</p>
+            <div class="related-tools">
+                <a href="image-compress.html">Image Compressor</a>
+                <a href="image-gif.html">Images to GIF</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-links">
+            <a href="https://github.com/devminitools" target="_blank" rel="noopener">GitHub</a>
+        </div>
+    </footer>
+
+    <script src="../js/i18n.js"></script>
+    <script src="../js/image-convert.js"></script>
+</body>
+</html>

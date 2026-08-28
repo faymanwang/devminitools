@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Validate IPv4 and IPv6 addresses online and identify private, loopback, link-local, multicast and other address types locally in your browser.">
+    <title>IP Address Tool - Validate IPv4 and IPv6 Online</title>
+    <link rel="canonical" href="https://faymanwang.github.io/devminitools/en/ip-lookup.html">
+    <link rel="alternate" hreflang="zh-CN" href="https://faymanwang.github.io/devminitools/ip-lookup.html">
+    <link rel="alternate" hreflang="en" href="https://faymanwang.github.io/devminitools/en/ip-lookup.html">
+    <link rel="alternate" hreflang="x-default" href="https://faymanwang.github.io/devminitools/ip-lookup.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="DevMiniTools">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:locale:alternate" content="zh_CN">
+    <meta property="og:title" content="IP Address Tool - Validate IPv4 and IPv6 Online">
+    <meta property="og:description" content="Validate IPv4 and IPv6 addresses online and identify private, loopback, link-local, multicast and other address types locally in your browser.">
+    <meta property="og:url" content="https://faymanwang.github.io/devminitools/en/ip-lookup.html">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="IP Address Tool - Validate IPv4 and IPv6 Online">
+    <meta name="twitter:description" content="Validate IPv4 and IPv6 addresses online and identify private, loopback, link-local, multicast and other address types locally in your browser.">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Online IP Address Tool",
+      "url": "https://faymanwang.github.io/devminitools/en/ip-lookup.html",
+      "description": "Validate IPv4 and IPv6 addresses online and identify private, loopback, link-local, multicast and other address types locally in your browser.",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Any",
+      "browserRequirements": "Requires JavaScript and a modern web browser",
+      "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+    </script>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="tool-page">
+    <header class="site-header">
+        <a href="index.html" class="brand" aria-label="DevMiniTools home">
+            <span class="brand-dev">Dev</span><span class="brand-name">MiniTools</span>
+        </a>
+        <nav class="site-nav" aria-label="Tool navigation">
+            <div class="nav-item">
+                <span class="nav-label" tabindex="0">JSON</span>
+                <div class="nav-dropdown">
+                    <a href="json-format.html">JSON Formatter</a>
+                    <a href="convert.html">JSON Converter</a>
+                </div>
+            </div>
+            <div class="nav-item">
+                <span class="nav-label" tabindex="0">Images</span>
+                <div class="nav-dropdown">
+                    <a href="image-compress.html">Image Compressor</a>
+                    <a href="image-convert.html">Image Converter</a>
+                    <a href="image-gif.html">Images to GIF</a>
+                </div>
+            </div>
+            <div class="nav-item">
+                <span class="nav-label" tabindex="0">Developer</span>
+                <div class="nav-dropdown">
+                    <a href="diff.html">Code Diff</a>
+                    <a href="color-convert.html">Color Converter</a>
+                    <a href="user-agent.html">User-Agent Parser</a>
+                    <a href="ip-lookup.html">IP Address</a>
+                </div>
+            </div>
+            <div class="nav-item">
+                <span class="nav-label" tabindex="0">Text</span>
+                <div class="nav-dropdown">
+                    <a href="markdown-preview.html">Markdown Preview</a>
+                    <a href="line-tools.html">Line Tools</a>
+                </div>
+            </div>
+        </nav>
+        <div class="language-switch" aria-label="Language selection"><a href="../ip-lookup.html" lang="zh-CN" hreflang="zh-CN">中文</a><span aria-current="page">EN</span></div>
+        <span class="header-note">Data is processed locally in your browser and is never uploaded</span>
+    </header>
+
+    <main class="tool-shell">
+        <h1 class="page-title">Online IP Address Tool</h1>
+        <section class="utility-workbench">
+            <div class="utility-grid two-column">
+                <article class="utility-panel">
+                    <h2>Input IP Address</h2>
+                    <input id="ip-input" type="text" placeholder="For example: 192.168.1.1 or 2001:db8::1">
+                    <div class="button-group compact">
+                        <button id="ip-lookup-btn" class="primary">Analyze</button>
+                        <button data-ip-sample="192.168.1.1" class="secondary">Private IPv4</button>
+                        <button data-ip-sample="8.8.8.8" class="secondary">Public IPv4</button>
+                        <button data-ip-sample="::1" class="secondary">IPv6 Loopback</button>
+                        <button id="ip-clear-btn" class="secondary">Clear</button>
+                    </div>
+                    <p class="muted">This tool does not query geolocation. It only validates formats and address types locally.</p>
+                </article>
+                <article class="utility-panel">
+                    <h2>Analysis Result</h2>
+                    <div id="ip-result" class="result-list"></div>
+                </article>
+            </div>
+            <div id="ip-message" class="json-message">Waiting for an IP address.</div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-links">
+            <a href="https://github.com/devminitools" target="_blank" rel="noopener">GitHub</a>
+        </div>
+    </footer>
+
+    <script src="../js/i18n.js"></script>
+    <script src="../js/ip-lookup.js"></script>
+</body>
+</html>
