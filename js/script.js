@@ -228,16 +228,16 @@ document.addEventListener('DOMContentLoaded', function() {
     function loadSample() {
         const sample = {
             id: 1001,
-            name: 'JavaPub 在线工具箱',
+            name: 'devminitools 在线工具箱',
             owner: {
-                name: '王仕宇',
-                github: 'Rodert'
+                name: 'devminitools',
+                github: 'devminitools'
             },
             features: ['JSON格式化', 'JSON压缩', 'JSON转YAML', 'JSON转TypeScript', 'JSON转Go Struct'],
             localOnly: true,
             links: {
-                docs: 'https://docs.chongplus.plus',
-                api: 'https://api.chongplus.plus'
+                docs: 'https://www.devminitools.com',
+                api: 'https://www.devminitools.com'
             }
         };
         jsonInput.value = JSON.stringify(sample, null, 2);
@@ -253,13 +253,28 @@ document.addEventListener('DOMContentLoaded', function() {
         updateStats(null, '');
     }
 
+    function updateFullscreenLabel() {
+        const workbench = document.querySelector('.json-workbench');
+        const isFullscreen = Boolean(document.fullscreenElement) || Boolean(workbench && workbench.classList.contains('is-fullscreen'));
+        fullscreenBtn.textContent = isFullscreen ? '退出全屏' : '全屏';
+    }
+
     function toggleFullscreen() {
         const workbench = document.querySelector('.json-workbench');
         if (!workbench) {
             return;
         }
-        workbench.classList.toggle('is-fullscreen');
-        fullscreenBtn.textContent = workbench.classList.contains('is-fullscreen') ? '退出全屏' : '全屏';
+
+        if (document.fullscreenElement) {
+            document.exitFullscreen().catch(() => {});
+        } else if (typeof workbench.requestFullscreen === 'function') {
+            workbench.requestFullscreen().catch(() => {
+                workbench.classList.add('is-fullscreen');
+            });
+        } else {
+            workbench.classList.toggle('is-fullscreen');
+        }
+        updateFullscreenLabel();
     }
 
     function jsonToTree(value, label = 'root', depth = 0) {
@@ -432,6 +447,7 @@ document.addEventListener('DOMContentLoaded', function() {
     copyBtn.addEventListener('click', copyResult);
     downloadBtn.addEventListener('click', downloadJson);
     fullscreenBtn.addEventListener('click', toggleFullscreen);
+    document.addEventListener('fullscreenchange', updateFullscreenLabel);
     outputMode.addEventListener('change', () => renderCurrent(outputMode.value));
     jsonInput.addEventListener('input', () => updateStats(lastJson, jsonInput.value));
 

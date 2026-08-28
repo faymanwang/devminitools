@@ -2,8 +2,8 @@ const { app, BrowserWindow, dialog, shell } = require('electron');
 const https = require('https');
 const path = require('path');
 
-const UPDATE_OWNER = 'Rodert';
-const UPDATE_REPO = 'jsonformat';
+const UPDATE_OWNER = 'faymanwang';
+const UPDATE_REPO = 'devminitools';
 const UPDATE_CHECK_DELAY_MS = 3000;
 const UPDATE_CHECK_TIMEOUT_MS = 8000;
 
@@ -13,7 +13,7 @@ function createWindow() {
     height: 860,
     minWidth: 1024,
     minHeight: 700,
-    title: 'JavaPub Tools',
+    title: 'DevMiniTools',
     backgroundColor: '#f5f7fb',
     webPreferences: {
       nodeIntegration: false,
@@ -57,7 +57,7 @@ function requestJson(url) {
     const request = https.get(url, {
       headers: {
         Accept: 'application/vnd.github+json',
-        'User-Agent': 'JavaPub-Tools-Updater'
+        'User-Agent': 'DevMiniTools-Updater'
       }
     }, response => {
       let body = '';

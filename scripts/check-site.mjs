@@ -62,7 +62,7 @@ if (!existsSync(sitemapPath)) {
         if (file === 'index.html') {
             continue;
         }
-        const expected = `https://rodert.github.io/jsonformat/${file}`;
+        const expected = `https://faymanwang.github.io/devminitools/${file}`;
         if (!sitemap.includes(expected)) {
             fail(`sitemap.xml: missing ${file}`);
         }
@@ -73,7 +73,7 @@ if (!existsSync(robotsPath)) {
     fail('missing robots.txt');
 } else {
     const robots = read('robots.txt');
-    if (!robots.includes('Sitemap: https://rodert.github.io/jsonformat/sitemap.xml')) {
+    if (!robots.includes('Sitemap: https://faymanwang.github.io/devminitools/sitemap.xml')) {
         fail('robots.txt: missing sitemap directive');
     }
 }

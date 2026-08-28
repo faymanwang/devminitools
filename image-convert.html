@@ -13,18 +13,43 @@
         <a href="index.html" class="brand" aria-label="DevMiniTools 首页">
             <span class="brand-dev">Dev</span><span class="brand-name">MiniTools</span>
         </a>
+        <nav class="site-nav" aria-label="工具导航">
+            <div class="nav-item">
+                <span class="nav-label" tabindex="0">JSON</span>
+                <div class="nav-dropdown">
+                    <a href="json-format.html">JSON格式化</a>
+                    <a href="convert.html">JSON转换</a>
+                </div>
+            </div>
+            <div class="nav-item">
+                <span class="nav-label" tabindex="0">图像</span>
+                <div class="nav-dropdown">
+                    <a href="image-compress.html">图片压缩</a>
+                    <a href="image-convert.html">图片格式转换</a>
+                    <a href="image-gif.html">图片合成 GIF</a>
+                </div>
+            </div>
+            <div class="nav-item">
+                <span class="nav-label" tabindex="0">调试</span>
+                <div class="nav-dropdown">
+                    <a href="diff.html">代码对比</a>
+                    <a href="color-convert.html">颜色转换</a>
+                    <a href="user-agent.html">User-Agent解析</a>
+                    <a href="ip-lookup.html">IP信息查询</a>
+                </div>
+            </div>
+            <div class="nav-item">
+                <span class="nav-label" tabindex="0">文本</span>
+                <div class="nav-dropdown">
+                    <a href="markdown-preview.html">Markdown预览</a>
+                    <a href="line-tools.html">多行文本处理</a>
+                </div>
+            </div>
+        </nav>
+        <span class="header-note">数据仅在浏览器本地处理，不上传服务器</span>
     </header>
 
     <main class="tool-shell">
-        <section class="tool-hero">
-            <div>
-                <p class="eyebrow">图像处理</p>
-                <h1>图片格式转换</h1>
-                <p>选择本地图片，转换为 JPEG、PNG 或 WebP。适合 PNG 转 JPG、JPG 转 WebP、WebP 转 PNG 等常见场景。</p>
-            </div>
-            <strong>图片仅在浏览器本地处理，不上传服务器。</strong>
-        </section>
-
         <section class="utility-workbench">
             <div class="utility-grid image-compress-layout">
                 <article class="utility-panel">
@@ -89,23 +114,15 @@
             <h2>在线图片格式转换</h2>
             <p>图片格式转换工具使用浏览器 Canvas 完成本地解码和重新编码，适合把透明 PNG 转为 JPG、把照片转为 WebP，或临时调整图片格式以适配上传限制。</p>
             <div class="related-tools">
-                <a href="image-tools.html">图像处理工具</a>
                 <a href="image-compress.html">图片压缩</a>
-                <a href="file-size.html">文件大小换算</a>
-                <a href="mime-type.html">MIME Type查询</a>
+                <a href="image-gif.html">图片合成 GIF</a>
             </div>
         </section>
     </main>
 
     <footer class="site-footer">
-        <div>
-            <strong>作者：王仕宇 / JavaPub</strong>
-            <p>适合 PNG、JPG、WebP 等常见图片格式互转。</p>
-        </div>
         <div class="footer-links">
-            <a href="image-tools.html">图像处理</a>
-            <a href="image-compress.html">图片压缩</a>
-            <a href="index.html">工具首页</a>
+            <a href="https://github.com/devminitools" target="_blank" rel="noopener">GitHub</a>
         </div>
     </footer>
 

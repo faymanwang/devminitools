@@ -14,18 +14,43 @@
         <a href="index.html" class="brand" aria-label="DevMiniTools 首页">
             <span class="brand-dev">Dev</span><span class="brand-name">MiniTools</span>
         </a>
+        <nav class="site-nav" aria-label="工具导航">
+            <div class="nav-item">
+                <span class="nav-label" tabindex="0">JSON</span>
+                <div class="nav-dropdown">
+                    <a href="json-format.html">JSON格式化</a>
+                    <a href="convert.html">JSON转换</a>
+                </div>
+            </div>
+            <div class="nav-item">
+                <span class="nav-label" tabindex="0">图像</span>
+                <div class="nav-dropdown">
+                    <a href="image-compress.html">图片压缩</a>
+                    <a href="image-convert.html">图片格式转换</a>
+                    <a href="image-gif.html">图片合成 GIF</a>
+                </div>
+            </div>
+            <div class="nav-item">
+                <span class="nav-label" tabindex="0">调试</span>
+                <div class="nav-dropdown">
+                    <a href="diff.html">代码对比</a>
+                    <a href="color-convert.html">颜色转换</a>
+                    <a href="user-agent.html">User-Agent解析</a>
+                    <a href="ip-lookup.html">IP信息查询</a>
+                </div>
+            </div>
+            <div class="nav-item">
+                <span class="nav-label" tabindex="0">文本</span>
+                <div class="nav-dropdown">
+                    <a href="markdown-preview.html">Markdown预览</a>
+                    <a href="line-tools.html">多行文本处理</a>
+                </div>
+            </div>
+        </nav>
+        <span class="header-note">数据仅在浏览器本地处理，不上传服务器</span>
     </header>
 
     <main class="tool-shell">
-        <section class="tool-hero">
-            <div>
-                <p class="eyebrow">数据格式类工具</p>
-                <h1>JSON格式化工具</h1>
-                <p>支持 JSON 美化、压缩、校验、复制、下载、树形查看、JSON 转 YAML/XML/TypeScript/Go Struct。</p>
-            </div>
-            <strong>数据仅在浏览器本地处理，不上传服务器。</strong>
-        </section>
-
         <section class="json-workbench" aria-label="JSON格式化工作台">
             <div class="json-toolbar">
                 <button id="format-btn" class="primary">格式化</button>
@@ -82,21 +107,13 @@
             <div class="related-tools">
                 <a href="convert.html">JSON 转多语言实体</a>
                 <a href="diff.html">JSON/代码对比</a>
-                <a href="crypto.html">Base64 与 URL 编码</a>
             </div>
         </section>
     </main>
 
     <footer class="site-footer">
-        <div>
-            <strong>作者：王仕宇 / JavaPub</strong>
-            <p>更多 AI 开发教程与 API 接入服务可访问相关站点。</p>
-        </div>
         <div class="footer-links">
-            <a href="https://github.com/Rodert" target="_blank" rel="noopener">GitHub</a>
-            <a href="https://gitee.com/rodert/jsonformat" target="_blank" rel="noopener">Gitee</a>
-            <a href="https://docs.chongplus.plus" target="_blank" rel="noopener">docs.chongplus.plus</a>
-            <a href="https://api.chongplus.plus" target="_blank" rel="noopener">api.chongplus.plus</a>
+            <a href="https://github.com/devminitools" target="_blank" rel="noopener">GitHub</a>
         </div>
     </footer>
 

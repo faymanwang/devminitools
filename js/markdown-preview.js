@@ -126,7 +126,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     document.getElementById('sample-md-btn').addEventListener('click', () => {
-        input.value = '# JavaPub Tools\n\n**开发者在线工具箱**，打开即用。\n\n- JSON格式化\n- 时间戳转换\n- Markdown预览\n\n> 数据仅在浏览器本地处理。\n\n```js\nconsole.log("hello tools");\n```\n\n| 工具 | 状态 |\n| --- | --- |\n| Markdown | 可用 |';
+        input.value = '# devminitools Tools\n\n**开发者在线工具箱**，打开即用。\n\n- JSON格式化\n- 时间戳转换\n- Markdown预览\n\n> 数据仅在浏览器本地处理。\n\n```js\nconsole.log("hello tools");\n```\n\n| 工具 | 状态 |\n| --- | --- |\n| Markdown | 可用 |';
         render();
     });
     document.getElementById('copy-md-html-btn').addEventListener('click', () => {

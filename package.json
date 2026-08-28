@@ -1,10 +1,10 @@
 {
-  "name": "javapub-tools",
+  "name": "devminitools-tools",
   "version": "1.0.0",
-  "description": "JavaPub 开发者在线工具箱离线桌面版",
+  "description": "DevMiniTools 开发者在线工具箱离线桌面版",
   "private": true,
   "main": "electron/main.js",
-  "author": "JavaPub",
+  "author": "faymanwang",
   "license": "MIT",
   "scripts": {
     "start": "electron .",
@@ -17,8 +17,8 @@
     "electron-builder": "24.13.3"
   },
   "build": {
-    "appId": "plus.javapub.tools",
-    "productName": "JavaPub Tools",
+    "appId": "plus.devminitools.tools",
+    "productName": "DevMiniTools",
     "artifactName": "${productName}-${version}-${os}-${arch}.${ext}",
     "directories": {
       "output": "release"
