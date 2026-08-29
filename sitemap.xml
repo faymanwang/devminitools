@@ -1,157 +1,166 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://devminitools.com/json-format.html</loc>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://devminitools.com/json-format.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://devminitools.com/en/json-format.html" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://devminitools.com/json-format.html" />
+    <loc>https://devminitools.com/</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://devminitools.com/" />
     <lastmod>2026-08-29</lastmod>
   </url>
   <url>
-    <loc>https://devminitools.com/en/json-format.html</loc>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://devminitools.com/json-format.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://devminitools.com/en/json-format.html" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://devminitools.com/json-format.html" />
+    <loc>https://devminitools.com/en/</loc>
     <lastmod>2026-08-29</lastmod>
   </url>
   <url>
-    <loc>https://devminitools.com/convert.html</loc>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://devminitools.com/convert.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://devminitools.com/en/convert.html" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://devminitools.com/convert.html" />
+    <loc>https://devminitools.com/json-format</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://devminitools.com/json-format" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://devminitools.com/en/json-format" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://devminitools.com/" />
     <lastmod>2026-08-29</lastmod>
   </url>
   <url>
-    <loc>https://devminitools.com/en/convert.html</loc>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://devminitools.com/convert.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://devminitools.com/en/convert.html" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://devminitools.com/convert.html" />
+    <loc>https://devminitools.com/en/json-format</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://devminitools.com/json-format" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://devminitools.com/en/json-format" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://devminitools.com/" />
     <lastmod>2026-08-29</lastmod>
   </url>
   <url>
-    <loc>https://devminitools.com/image-compress.html</loc>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://devminitools.com/image-compress.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://devminitools.com/en/image-compress.html" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://devminitools.com/image-compress.html" />
+    <loc>https://devminitools.com/convert</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://devminitools.com/convert" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://devminitools.com/en/convert" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://devminitools.com/" />
     <lastmod>2026-08-29</lastmod>
   </url>
   <url>
-    <loc>https://devminitools.com/en/image-compress.html</loc>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://devminitools.com/image-compress.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://devminitools.com/en/image-compress.html" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://devminitools.com/image-compress.html" />
+    <loc>https://devminitools.com/en/convert</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://devminitools.com/convert" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://devminitools.com/en/convert" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://devminitools.com/" />
     <lastmod>2026-08-29</lastmod>
   </url>
   <url>
-    <loc>https://devminitools.com/image-convert.html</loc>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://devminitools.com/image-convert.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://devminitools.com/en/image-convert.html" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://devminitools.com/image-convert.html" />
+    <loc>https://devminitools.com/image-compress</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://devminitools.com/image-compress" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://devminitools.com/en/image-compress" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://devminitools.com/" />
     <lastmod>2026-08-29</lastmod>
   </url>
   <url>
-    <loc>https://devminitools.com/en/image-convert.html</loc>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://devminitools.com/image-convert.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://devminitools.com/en/image-convert.html" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://devminitools.com/image-convert.html" />
+    <loc>https://devminitools.com/en/image-compress</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://devminitools.com/image-compress" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://devminitools.com/en/image-compress" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://devminitools.com/" />
     <lastmod>2026-08-29</lastmod>
   </url>
   <url>
-    <loc>https://devminitools.com/image-gif.html</loc>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://devminitools.com/image-gif.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://devminitools.com/en/image-gif.html" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://devminitools.com/image-gif.html" />
+    <loc>https://devminitools.com/image-convert</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://devminitools.com/image-convert" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://devminitools.com/en/image-convert" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://devminitools.com/" />
     <lastmod>2026-08-29</lastmod>
   </url>
   <url>
-    <loc>https://devminitools.com/en/image-gif.html</loc>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://devminitools.com/image-gif.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://devminitools.com/en/image-gif.html" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://devminitools.com/image-gif.html" />
+    <loc>https://devminitools.com/en/image-convert</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://devminitools.com/image-convert" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://devminitools.com/en/image-convert" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://devminitools.com/" />
     <lastmod>2026-08-29</lastmod>
   </url>
   <url>
-    <loc>https://devminitools.com/color-convert.html</loc>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://devminitools.com/color-convert.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://devminitools.com/en/color-convert.html" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://devminitools.com/color-convert.html" />
+    <loc>https://devminitools.com/image-gif</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://devminitools.com/image-gif" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://devminitools.com/en/image-gif" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://devminitools.com/" />
     <lastmod>2026-08-29</lastmod>
   </url>
   <url>
-    <loc>https://devminitools.com/en/color-convert.html</loc>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://devminitools.com/color-convert.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://devminitools.com/en/color-convert.html" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://devminitools.com/color-convert.html" />
+    <loc>https://devminitools.com/en/image-gif</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://devminitools.com/image-gif" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://devminitools.com/en/image-gif" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://devminitools.com/" />
     <lastmod>2026-08-29</lastmod>
   </url>
   <url>
-    <loc>https://devminitools.com/user-agent.html</loc>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://devminitools.com/user-agent.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://devminitools.com/en/user-agent.html" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://devminitools.com/user-agent.html" />
+    <loc>https://devminitools.com/color-convert</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://devminitools.com/color-convert" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://devminitools.com/en/color-convert" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://devminitools.com/" />
     <lastmod>2026-08-29</lastmod>
   </url>
   <url>
-    <loc>https://devminitools.com/en/user-agent.html</loc>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://devminitools.com/user-agent.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://devminitools.com/en/user-agent.html" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://devminitools.com/user-agent.html" />
+    <loc>https://devminitools.com/en/color-convert</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://devminitools.com/color-convert" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://devminitools.com/en/color-convert" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://devminitools.com/" />
     <lastmod>2026-08-29</lastmod>
   </url>
   <url>
-    <loc>https://devminitools.com/diff.html</loc>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://devminitools.com/diff.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://devminitools.com/en/diff.html" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://devminitools.com/diff.html" />
+    <loc>https://devminitools.com/user-agent</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://devminitools.com/user-agent" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://devminitools.com/en/user-agent" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://devminitools.com/" />
     <lastmod>2026-08-29</lastmod>
   </url>
   <url>
-    <loc>https://devminitools.com/en/diff.html</loc>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://devminitools.com/diff.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://devminitools.com/en/diff.html" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://devminitools.com/diff.html" />
+    <loc>https://devminitools.com/en/user-agent</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://devminitools.com/user-agent" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://devminitools.com/en/user-agent" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://devminitools.com/" />
     <lastmod>2026-08-29</lastmod>
   </url>
   <url>
-    <loc>https://devminitools.com/markdown-preview.html</loc>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://devminitools.com/markdown-preview.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://devminitools.com/en/markdown-preview.html" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://devminitools.com/markdown-preview.html" />
+    <loc>https://devminitools.com/diff</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://devminitools.com/diff" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://devminitools.com/en/diff" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://devminitools.com/" />
     <lastmod>2026-08-29</lastmod>
   </url>
   <url>
-    <loc>https://devminitools.com/en/markdown-preview.html</loc>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://devminitools.com/markdown-preview.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://devminitools.com/en/markdown-preview.html" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://devminitools.com/markdown-preview.html" />
+    <loc>https://devminitools.com/en/diff</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://devminitools.com/diff" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://devminitools.com/en/diff" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://devminitools.com/" />
     <lastmod>2026-08-29</lastmod>
   </url>
   <url>
-    <loc>https://devminitools.com/line-tools.html</loc>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://devminitools.com/line-tools.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://devminitools.com/en/line-tools.html" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://devminitools.com/line-tools.html" />
+    <loc>https://devminitools.com/markdown-preview</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://devminitools.com/markdown-preview" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://devminitools.com/en/markdown-preview" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://devminitools.com/" />
     <lastmod>2026-08-29</lastmod>
   </url>
   <url>
-    <loc>https://devminitools.com/en/line-tools.html</loc>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://devminitools.com/line-tools.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://devminitools.com/en/line-tools.html" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://devminitools.com/line-tools.html" />
+    <loc>https://devminitools.com/en/markdown-preview</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://devminitools.com/markdown-preview" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://devminitools.com/en/markdown-preview" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://devminitools.com/" />
     <lastmod>2026-08-29</lastmod>
   </url>
   <url>
-    <loc>https://devminitools.com/ip-lookup.html</loc>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://devminitools.com/ip-lookup.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://devminitools.com/en/ip-lookup.html" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://devminitools.com/ip-lookup.html" />
+    <loc>https://devminitools.com/line-tools</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://devminitools.com/line-tools" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://devminitools.com/en/line-tools" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://devminitools.com/" />
     <lastmod>2026-08-29</lastmod>
   </url>
   <url>
-    <loc>https://devminitools.com/en/ip-lookup.html</loc>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://devminitools.com/ip-lookup.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://devminitools.com/en/ip-lookup.html" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://devminitools.com/ip-lookup.html" />
+    <loc>https://devminitools.com/en/line-tools</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://devminitools.com/line-tools" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://devminitools.com/en/line-tools" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://devminitools.com/" />
+    <lastmod>2026-08-29</lastmod>
+  </url>
+  <url>
+    <loc>https://devminitools.com/ip-lookup</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://devminitools.com/ip-lookup" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://devminitools.com/en/ip-lookup" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://devminitools.com/" />
+    <lastmod>2026-08-29</lastmod>
+  </url>
+  <url>
+    <loc>https://devminitools.com/en/ip-lookup</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://devminitools.com/ip-lookup" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://devminitools.com/en/ip-lookup" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://devminitools.com/" />
     <lastmod>2026-08-29</lastmod>
   </url>
 </urlset>

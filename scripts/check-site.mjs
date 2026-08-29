@@ -26,7 +26,10 @@ function normalizedRelative(path) {
 }
 
 function expectedUrl(path) {
-    return `${baseUrl}/${normalizedRelative(path)}`;
+    const file = normalizedRelative(path);
+    if (file === 'index.html') return `${baseUrl}/`;
+    if (file === 'en/index.html') return `${baseUrl}/en/`;
+    return `${baseUrl}/${file.replace(/\.html$/, '')}`;
 }
 
 const htmlFiles = walkHtml(root).sort();
@@ -40,25 +43,32 @@ for (const path of htmlFiles) {
     const file = normalizedRelative(path);
     const html = read(path);
     const isEnglish = file.startsWith('en/');
-    const isRedirect = basename(path) === 'index.html';
+    const isIndex = basename(path) === 'index.html';
 
     if (!/<title>[^<]+<\/title>/.test(html)) fail(`${file}: missing <title>`);
     if (!/<meta\s+name="description"\s+content="[^"]+"/.test(html)) fail(`${file}: missing meta description`);
     if (!new RegExp(`<html\\s+lang="${isEnglish ? 'en' : 'zh-CN'}">`).test(html)) fail(`${file}: incorrect html lang`);
 
-    if (isRedirect) {
-        if (!/<meta\s+name="robots"\s+content="noindex,follow">/.test(html)) fail(`${file}: redirect page must be noindex,follow`);
+    if (isIndex) {
+        const canonical = expectedUrl(path);
+        const h1Count = (html.match(/<h1\b/g) || []).length;
+        if (h1Count !== 1) fail(`${file}: expected one h1, found ${h1Count}`);
+        if (!html.includes(`<link rel="canonical" href="${canonical}">`)) fail(`${file}: incorrect canonical`);
+        if (/http-equiv="refresh"|location\.replace\(/.test(html)) fail(`${file}: homepage must not redirect`);
+        if (/name="robots"\s+content="noindex/.test(html)) fail(`${file}: homepage must be indexable`);
+        if (file === 'index.html' && !html.includes(`<link rel="alternate" hreflang="x-default" href="${baseUrl}/">`)) fail(`${file}: missing root x-default`);
     } else {
         const canonical = expectedUrl(path);
         const pageName = basename(path);
-        const zhUrl = `${baseUrl}/${pageName}`;
-        const enUrl = `${baseUrl}/en/${pageName}`;
+        const slug = pageName.replace(/\.html$/, '');
+        const zhUrl = `${baseUrl}/${slug}`;
+        const enUrl = `${baseUrl}/en/${slug}`;
         const h1Count = (html.match(/<h1\b/g) || []).length;
         if (h1Count !== 1) fail(`${file}: expected one h1, found ${h1Count}`);
         if (!html.includes(`<link rel="canonical" href="${canonical}">`)) fail(`${file}: incorrect canonical`);
         if (!html.includes(`<link rel="alternate" hreflang="zh-CN" href="${zhUrl}">`)) fail(`${file}: missing zh-CN hreflang`);
         if (!html.includes(`<link rel="alternate" hreflang="en" href="${enUrl}">`)) fail(`${file}: missing en hreflang`);
-        if (!html.includes(`<link rel="alternate" hreflang="x-default" href="${zhUrl}">`)) fail(`${file}: missing x-default hreflang`);
+        if (!html.includes(`<link rel="alternate" hreflang="x-default" href="${baseUrl}/">`)) fail(`${file}: missing x-default hreflang`);
         for (const property of ['og:type', 'og:site_name', 'og:locale', 'og:title', 'og:description', 'og:url']) {
             if (!html.includes(`property="${property}"`)) fail(`${file}: missing ${property}`);
         }
@@ -104,7 +114,9 @@ if (!existsSync(sitemapPath)) {
 } else {
     const sitemap = read(sitemapPath);
     if (!sitemap.includes('xmlns:xhtml="http://www.w3.org/1999/xhtml"')) fail('sitemap.xml: missing xhtml namespace');
-    if (sitemap.includes(`<loc>${baseUrl}/</loc>`)) fail('sitemap.xml: redirect root must not be submitted');
+    if (!sitemap.includes(`<loc>${baseUrl}/</loc>`)) fail('sitemap.xml: missing neutral root');
+    if (!sitemap.includes(`<loc>${baseUrl}/en/</loc>`)) fail('sitemap.xml: missing English index');
+    if (/<loc>[^<]*\.html<\/loc>/.test(sitemap)) fail('sitemap.xml: must use final clean URLs');
     for (const path of toolFiles) {
         const url = expectedUrl(path);
         if (!sitemap.includes(`<loc>${url}</loc>`)) fail(`sitemap.xml: missing ${normalizedRelative(path)}`);

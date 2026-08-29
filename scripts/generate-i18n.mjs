@@ -292,11 +292,20 @@ function escapeHtml(value) {
     return value.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 }
 
+function cleanPath(file, language = 'zh') {
+    const slug = file.replace(/\.html$/, '');
+    return language === 'en' ? `/en/${slug}` : `/${slug}`;
+}
+
+function publicUrl(file, language = 'zh') {
+    return `${baseUrl}${cleanPath(file, language)}`;
+}
+
 function seoBlock(file, config, language) {
     const isEnglish = language === 'en';
-    const canonical = isEnglish ? `${baseUrl}/en/${file}` : `${baseUrl}/${file}`;
-    const zhUrl = `${baseUrl}/${file}`;
-    const enUrl = `${baseUrl}/en/${file}`;
+    const canonical = publicUrl(file, language);
+    const zhUrl = publicUrl(file, 'zh');
+    const enUrl = publicUrl(file, 'en');
     const title = isEnglish ? config.enTitle : config.zhTitle;
     const description = isEnglish ? config.enDescription : config.zhDescription;
     const locale = isEnglish ? 'en_US' : 'zh_CN';
@@ -320,7 +329,7 @@ function seoBlock(file, config, language) {
     return `    <link rel="canonical" href="${canonical}">\n` +
         `    <link rel="alternate" hreflang="zh-CN" href="${zhUrl}">\n` +
         `    <link rel="alternate" hreflang="en" href="${enUrl}">\n` +
-        `    <link rel="alternate" hreflang="x-default" href="${zhUrl}">\n` +
+        `    <link rel="alternate" hreflang="x-default" href="${baseUrl}/">\n` +
         `    <meta property="og:type" content="website">\n` +
         `    <meta property="og:site_name" content="DevMiniTools">\n` +
         `    <meta property="og:locale" content="${locale}">\n` +
@@ -405,6 +414,7 @@ mkdirSync(join(root, 'en'), { recursive: true });
 for (const [file, config] of Object.entries(pages)) {
     const sourcePath = join(root, file);
     let chinese = readFileSync(sourcePath, 'utf8');
+    chinese = chinese.replaceAll('https://github.com/devminitools', 'https://github.com/faymanwang/devminitools');
     chinese = addSeo(chinese, file, config, 'zh');
     chinese = addPageTitle(chinese, config.zhH1);
     chinese = addLanguageSwitch(chinese, file, 'zh');
@@ -419,26 +429,77 @@ for (const [file, config] of Object.entries(pages)) {
     writeFileSync(join(root, 'en', file), english, 'utf8');
 }
 
-const englishIndex = `<!DOCTYPE html>\n<html lang="en">\n<head>\n    <meta charset="UTF-8">\n    <meta name="viewport" content="width=device-width, initial-scale=1.0">\n    <meta name="description" content="DevMiniTools provides browser-based JSON, image, code, text and developer utilities.">\n    <meta name="robots" content="noindex,follow">\n    <title>DevMiniTools Developer Tools</title>\n    <meta http-equiv="refresh" content="0; url=json-format.html">\n    <link rel="canonical" href="${baseUrl}/en/json-format.html">\n    <script>location.replace('json-format.html');</script>\n    <style>body{background:#f2f4f7;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif}</style>\n</head>\n<body></body>\n</html>\n`;
+const englishCards = Object.entries(pages).map(([file, config]) => `            <a class="tool-card" href="${file}"><span class="tool-badge">Free</span><h3>${config.enH1}</h3><p>${config.enDescription}</p></a>`).join('\n');
+const englishIndex = `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explore DevMiniTools browser-based JSON, image, code, text and developer utilities in English.">
+    <title>DevMiniTools English Developer Tools</title>
+    <link rel="canonical" href="${baseUrl}/en/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="DevMiniTools">
+    <meta property="og:title" content="DevMiniTools English Developer Tools">
+    <meta property="og:description" content="Free browser-based developer tools with local data processing.">
+    <meta property="og:url" content="${baseUrl}/en/">
+    <meta name="twitter:card" content="summary">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="home-page">
+    <header class="site-header"><a href="../index.html" class="brand" aria-label="DevMiniTools home"><span class="brand-dev">Dev</span><span class="brand-name">MiniTools</span></a><div class="language-switch" aria-label="Language selection"><a href="../index.html" lang="zh-CN">中文</a><span aria-current="page">EN</span></div></header>
+    <main class="home-shell">
+        <section class="hero-panel"><div><p class="eyebrow">Free · Private · Browser-based</p><h1>English Developer Tools</h1><p class="hero-desc">Use JSON, image, code and text utilities without uploading your data.</p></div><a class="language-choice" href="../index.html" lang="zh-CN">访问中文入口</a></section>
+        <section class="section-block"><div class="section-heading"><div><h2>All tools</h2><p>Choose a tool to get started.</p></div></div><div class="tool-grid home-tool-grid">${englishCards}</div></section>
+    </main>
+    <footer class="site-footer"><div><strong>DevMiniTools</strong><p>Free developer tools that run in your browser.</p></div><div class="footer-links"><a href="https://github.com/faymanwang/devminitools" target="_blank" rel="noopener">GitHub</a></div></footer>
+</body>
+</html>
+`;
 writeFileSync(join(root, 'en', 'index.html'), englishIndex, 'utf8');
 
-let rootIndex = readFileSync(join(root, 'index.html'), 'utf8');
-if (!/<meta\s+name="robots"/.test(rootIndex)) {
-    rootIndex = rootIndex.replace(/(<meta\s+name="description"[^>]*>)/, '$1\n    <meta name="robots" content="noindex,follow">');
-}
-rootIndex = rootIndex.replace(/<link\s+rel="canonical"\s+href="[^"]+">/, `<link rel="canonical" href="${baseUrl}/json-format.html">`);
+const rootIndex = `<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="DevMiniTools 免费开发者在线工具箱，提供中文与 English JSON、图片、代码和文本工具，数据仅在浏览器本地处理。">
+    <title>DevMiniTools 开发者工具 / Developer Tools</title>
+    <link rel="canonical" href="${baseUrl}/">
+    <link rel="alternate" hreflang="zh-CN" href="${publicUrl('json-format.html', 'zh')}">
+    <link rel="alternate" hreflang="en" href="${baseUrl}/en/">
+    <link rel="alternate" hreflang="x-default" href="${baseUrl}/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="DevMiniTools">
+    <meta property="og:title" content="DevMiniTools 开发者工具 / Developer Tools">
+    <meta property="og:description" content="Free browser-based developer tools in Chinese and English.">
+    <meta property="og:url" content="${baseUrl}/">
+    <meta name="twitter:card" content="summary">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"DevMiniTools","url":"${baseUrl}/","inLanguage":["zh-CN","en"]}</script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="home-page">
+    <header class="site-header"><a href="index.html" class="brand" aria-label="DevMiniTools 首页"><span class="brand-dev">Dev</span><span class="brand-name">MiniTools</span></a></header>
+    <main class="home-shell">
+        <section class="hero-panel language-hero"><div><p class="eyebrow">Free · Private · Browser-based</p><h1>开发者工具 / Developer Tools</h1><p class="hero-desc">选择语言开始使用。Choose your language to get started.</p></div><div class="language-options"><a class="language-choice" href="json-format.html" lang="zh-CN"><strong>中文工具</strong><span>进入中文版 JSON、图片、代码与文本工具</span></a><a class="language-choice" href="en/index.html" lang="en"><strong>English Tools</strong><span>Open the English developer tool collection</span></a></div></section>
+        <section class="section-block"><div class="section-heading"><div><h2>热门工具 / Popular tools</h2><p>所有处理均在浏览器本地完成。</p></div></div><div class="tool-grid language-tool-grid"><a class="tool-card" href="json-format.html"><span class="tool-badge">中文</span><h3>JSON 格式化</h3><p>美化、压缩、校验和转换 JSON。</p></a><a class="tool-card" href="en/json-format.html"><span class="tool-badge">EN</span><h3>JSON Formatter</h3><p>Format, minify, validate and convert JSON.</p></a><a class="tool-card" href="image-compress.html"><span class="tool-badge">中文</span><h3>图片压缩</h3><p>在浏览器中压缩常见图片格式。</p></a><a class="tool-card" href="en/image-compress.html"><span class="tool-badge">EN</span><h3>Image Compressor</h3><p>Compress common image formats locally.</p></a></div></section>
+    </main>
+    <footer class="site-footer"><div><strong>DevMiniTools</strong><p>数据仅在浏览器本地处理 · Data stays in your browser.</p></div><div class="footer-links"><a href="https://github.com/faymanwang/devminitools" target="_blank" rel="noopener">GitHub</a></div></footer>
+</body>
+</html>
+`;
 writeFileSync(join(root, 'index.html'), rootIndex, 'utf8');
 
 const sitemapEntries = Object.keys(pages).flatMap(file => {
-    const zhUrl = `${baseUrl}/${file}`;
-    const enUrl = `${baseUrl}/en/${file}`;
+    const zhUrl = publicUrl(file, 'zh');
+    const enUrl = publicUrl(file, 'en');
     return [
         { loc: zhUrl, zhUrl, enUrl },
         { loc: enUrl, zhUrl, enUrl }
     ];
 });
 
-const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n${sitemapEntries.map(entry => `  <url>\n    <loc>${entry.loc}</loc>\n    <xhtml:link rel="alternate" hreflang="zh-CN" href="${entry.zhUrl}" />\n    <xhtml:link rel="alternate" hreflang="en" href="${entry.enUrl}" />\n    <xhtml:link rel="alternate" hreflang="x-default" href="${entry.zhUrl}" />\n    <lastmod>${lastModified}</lastmod>\n  </url>`).join('\n')}\n</urlset>\n`;
+const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n  <url>\n    <loc>${baseUrl}/</loc>\n    <xhtml:link rel="alternate" hreflang="x-default" href="${baseUrl}/" />\n    <lastmod>${lastModified}</lastmod>\n  </url>\n  <url>\n    <loc>${baseUrl}/en/</loc>\n    <lastmod>${lastModified}</lastmod>\n  </url>\n${sitemapEntries.map(entry => `  <url>\n    <loc>${entry.loc}</loc>\n    <xhtml:link rel="alternate" hreflang="zh-CN" href="${entry.zhUrl}" />\n    <xhtml:link rel="alternate" hreflang="en" href="${entry.enUrl}" />\n    <xhtml:link rel="alternate" hreflang="x-default" href="${baseUrl}/" />\n    <lastmod>${lastModified}</lastmod>\n  </url>`).join('\n')}\n</urlset>\n`;
 writeFileSync(join(root, 'sitemap.xml'), sitemap, 'utf8');
 
 console.log(`Generated ${Object.keys(pages).length} English tool pages and bilingual SEO metadata.`);
