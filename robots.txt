@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://faymanwang.github.io/devminitools/sitemap.xml
+Sitemap: https://devminitools.com/sitemap.xml

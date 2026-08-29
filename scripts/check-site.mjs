@@ -2,7 +2,7 @@ import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { basename, dirname, extname, join, relative, resolve } from 'node:path';
 
 const root = process.cwd();
-const baseUrl = 'https://faymanwang.github.io/devminitools';
+const baseUrl = 'https://devminitools.com';
 const failures = [];
 
 function walkHtml(directory) {

@@ -2,7 +2,7 @@ import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 const root = process.cwd();
-const baseUrl = 'https://faymanwang.github.io/devminitools';
+const baseUrl = 'https://devminitools.com';
 const lastModified = '2026-08-29';
 
 const pages = {

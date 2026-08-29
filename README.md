@@ -4,7 +4,7 @@ DevMiniTools 是一个轻量、开源的开发者在线工具箱。工具直接�
 
 ## 在线使用
 
-[https://faymanwang.github.io/devminitools/](https://faymanwang.github.io/devminitools/)
+[https://devminitools.com/](https://devminitools.com/)
 
 ## 工具列表
 
