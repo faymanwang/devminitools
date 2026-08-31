@@ -6,7 +6,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const outputMode = document.getElementById('output-mode');
     const formatBtn = document.getElementById('format-btn');
     const compressBtn = document.getElementById('compress-btn');
-    const validateBtn = document.getElementById('validate-btn');
+    const outputCompressBtn = document.getElementById('output-compress-btn');
+    const outputFormatBtn = document.getElementById('output-format-btn');
+    const outputCopyBtn = document.getElementById('output-copy-btn');
     const escapeBtn = document.getElementById('escape-btn');
     const unescapeBtn = document.getElementById('unescape-btn');
     const clearBtn = document.getElementById('clear-btn');
@@ -27,6 +29,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
     let lastJson = null;
     let lastOutput = '';
+    let autoFormatTimer = null;
+    const isEnglish = document.documentElement.lang === 'en';
+
+    function treeToggleLabel(expanded, path) {
+        if (isEnglish) return `${expanded ? 'Collapse' : 'Expand'} ${path}`;
+        return `${expanded ? '收起' : '展开'} ${path}`;
+    }
 
     function parseInput() {
         const inputText = jsonInput.value.trim();
@@ -46,10 +55,111 @@ document.addEventListener('DOMContentLoaded', function() {
         jsonOutput.textContent = text;
         jsonOutput.className = language || 'json';
 
-        if (typeof hljs !== 'undefined') {
+        if (typeof hljs !== 'undefined' && language !== 'json-error-output') {
             jsonOutput.removeAttribute('data-highlighted');
             hljs.highlightElement(jsonOutput);
         }
+    }
+
+    function isContainer(value) {
+        return value !== null && typeof value === 'object';
+    }
+
+    function formatTreeValue(value) {
+        if (value === null) return { text: 'null', type: 'null' };
+        if (typeof value === 'string') return { text: JSON.stringify(value), type: 'string' };
+        if (typeof value === 'number') return { text: String(value), type: 'number' };
+        if (typeof value === 'boolean') return { text: String(value), type: 'boolean' };
+        return { text: String(value), type: 'value' };
+    }
+
+    function renderJsonTree(value) {
+        lastOutput = JSON.stringify(value, null, 2);
+        jsonOutput.className = 'json-tree';
+        jsonOutput.removeAttribute('data-highlighted');
+        jsonOutput.replaceChildren(createTreeNode(value, null, true, 'root'));
+    }
+
+    function createTreeNode(value, key, expanded, path) {
+        const row = document.createElement('span');
+        row.className = 'json-tree-node';
+
+        const line = document.createElement('span');
+        line.className = 'json-tree-line';
+        row.appendChild(line);
+
+        if (isContainer(value)) {
+            const entries = Array.isArray(value) ? value.map((item, index) => [index, item]) : Object.entries(value);
+            const opening = Array.isArray(value) ? '[' : '{';
+            const closing = Array.isArray(value) ? ']' : '}';
+            const typeName = Array.isArray(value) ? 'Array' : 'Object';
+            const toggle = document.createElement('button');
+            toggle.type = 'button';
+            toggle.className = 'json-tree-toggle';
+            toggle.setAttribute('aria-expanded', String(expanded));
+            toggle.setAttribute('aria-label', treeToggleLabel(expanded, path));
+            toggle.textContent = expanded ? '−' : '+';
+            line.appendChild(toggle);
+
+            appendTreeKey(line, key);
+
+            const bracket = document.createElement('span');
+            bracket.className = 'json-tree-bracket';
+            bracket.textContent = opening;
+            bracket.hidden = !expanded;
+            line.appendChild(bracket);
+
+            const summary = document.createElement('span');
+            summary.className = 'json-tree-summary';
+            summary.textContent = `${typeName}{…} · ${entries.length}`;
+            summary.hidden = expanded;
+            line.appendChild(summary);
+
+            const children = document.createElement('span');
+            children.className = 'json-tree-children';
+            children.hidden = !expanded;
+            entries.forEach(([childKey, childValue]) => {
+                children.appendChild(createTreeNode(childValue, childKey, true, `${path}.${childKey}`));
+            });
+            row.appendChild(children);
+
+            const closingLine = document.createElement('span');
+            closingLine.className = 'json-tree-closing';
+            closingLine.textContent = closing;
+            closingLine.hidden = !expanded;
+            row.appendChild(closingLine);
+
+            toggle.addEventListener('click', () => {
+                const nextExpanded = toggle.getAttribute('aria-expanded') !== 'true';
+                toggle.setAttribute('aria-expanded', String(nextExpanded));
+                toggle.setAttribute('aria-label', treeToggleLabel(nextExpanded, path));
+                toggle.textContent = nextExpanded ? '−' : '+';
+                children.hidden = !nextExpanded;
+                closingLine.hidden = !nextExpanded;
+                bracket.hidden = !nextExpanded;
+                summary.hidden = nextExpanded;
+            });
+        } else {
+            const spacer = document.createElement('span');
+            spacer.className = 'json-tree-spacer';
+            line.appendChild(spacer);
+            appendTreeKey(line, key);
+            const formatted = formatTreeValue(value);
+            const primitive = document.createElement('span');
+            primitive.className = `json-tree-${formatted.type}`;
+            primitive.textContent = formatted.text;
+            line.appendChild(primitive);
+        }
+
+        return row;
+    }
+
+    function appendTreeKey(parent, key) {
+        if (key === null) return;
+        const keyElement = document.createElement('span');
+        keyElement.className = 'json-tree-key';
+        keyElement.textContent = typeof key === 'number' ? `${key}: ` : `${JSON.stringify(String(key))}: `;
+        parent.appendChild(keyElement);
     }
 
     function formatBytes(bytes) {
@@ -112,7 +222,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         switch (mode) {
             case 'tree':
-                setOutput(jsonToTree(lastJson), 'plaintext');
+                renderJsonTree(lastJson);
                 break;
             case 'yaml':
                 setOutput(jsonToYaml(lastJson), 'yaml');
@@ -127,7 +237,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 setOutput(jsonToGoStruct(lastJson), 'go');
                 break;
             default:
-                setOutput(JSON.stringify(lastJson, null, 2), 'json');
+                renderJsonTree(lastJson);
         }
     }
 
@@ -144,22 +254,19 @@ document.addEventListener('DOMContentLoaded', function() {
                 outputMode.value = 'json';
                 setOutput(JSON.stringify(lastJson), 'json');
                 setMessage('压缩成功，已移除多余空白字符。', 'success');
-            } else if (action === 'validate') {
-                outputMode.value = 'json';
-                setOutput(JSON.stringify(lastJson, null, 2), 'json');
-                setMessage('JSON 校验通过。', 'success');
             } else {
                 outputMode.value = 'json';
-                setOutput(JSON.stringify(lastJson, null, 2), 'json');
+                renderJsonTree(lastJson);
                 setMessage('格式化成功。', 'success');
             }
 
             updateStats(lastJson, inputText);
         } catch (error) {
             lastJson = null;
-            setOutput('', 'plaintext');
+            const errorText = `错误：${locateJsonError(error, inputText)}`;
+            setOutput(errorText, 'json-error-output');
             updateStats(null, inputText);
-            setMessage(`错误：${locateJsonError(error, inputText)}`, 'error');
+            setMessage(errorText, 'error');
         }
     }
 
@@ -251,6 +358,32 @@ document.addEventListener('DOMContentLoaded', function() {
         setOutput('', 'json');
         setMessage('等待输入 JSON 数据。', '');
         updateStats(null, '');
+    }
+
+    function autoFormatInput() {
+        window.clearTimeout(autoFormatTimer);
+        const inputText = jsonInput.value.trim();
+        updateStats(lastJson, jsonInput.value);
+
+        if (!inputText) {
+            clearAll();
+            return;
+        }
+
+        autoFormatTimer = window.setTimeout(() => {
+            try {
+                lastJson = JSON.parse(inputText);
+                renderCurrent(outputMode.value);
+                updateStats(lastJson, inputText);
+                setMessage(isEnglish ? 'JSON formatted automatically.' : '已自动格式化。', 'success');
+            } catch (error) {
+                lastJson = null;
+                const errorText = `错误：${locateJsonError(error, inputText)}`;
+                setOutput(errorText, 'json-error-output');
+                updateStats(null, inputText);
+                setMessage(errorText, 'error');
+            }
+        }, 300);
     }
 
     function updateFullscreenLabel() {
@@ -439,17 +572,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
     formatBtn.addEventListener('click', () => handleJsonAction('format'));
     compressBtn.addEventListener('click', () => handleJsonAction('compress'));
-    validateBtn.addEventListener('click', () => handleJsonAction('validate'));
+    outputCompressBtn.addEventListener('click', () => handleJsonAction('compress'));
+    outputFormatBtn.addEventListener('click', () => handleJsonAction('format'));
     escapeBtn.addEventListener('click', escapeInput);
     unescapeBtn.addEventListener('click', unescapeInput);
     clearBtn.addEventListener('click', clearAll);
     sampleBtn.addEventListener('click', loadSample);
     copyBtn.addEventListener('click', copyResult);
+    outputCopyBtn.addEventListener('click', copyResult);
     downloadBtn.addEventListener('click', downloadJson);
     fullscreenBtn.addEventListener('click', toggleFullscreen);
     document.addEventListener('fullscreenchange', updateFullscreenLabel);
     outputMode.addEventListener('change', () => renderCurrent(outputMode.value));
-    jsonInput.addEventListener('input', () => updateStats(lastJson, jsonInput.value));
+    jsonInput.addEventListener('input', autoFormatInput);
 
     updateStats(null, '');
 });

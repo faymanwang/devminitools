@@ -10,7 +10,7 @@ DevMiniTools 是一个轻量、开源的开发者在线工具箱。工具直接�
 
 | 分类 | 工具 |
 | --- | --- |
-| JSON | JSON 格式化、校验、压缩及类型转换；JSON 转 Java、Go、C#、Rust、Ruby、XML、YAML |
+| JSON | JSON 格式化、压缩及类型转换；JSON 转 Java、Go、C#、Rust、Ruby、XML、YAML |
 | 图片 | 图片压缩、PNG/JPEG/WebP/AVIF 格式转换、多图合成 GIF |
 | 文本与代码 | 代码差异对比、Markdown 实时预览、多行文本处理 |
 | 查询与转换 | HEX/RGB/HSL 颜色转换、IPv4/IPv6 地址识别、User-Agent 解析 |
