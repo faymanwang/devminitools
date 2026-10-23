@@ -25,15 +25,14 @@ function createWindow() {
   win.loadFile(path.join(__dirname, '..', 'index.html'));
 
   win.webContents.setWindowOpenHandler(({ url }) => {
-    shell.openExternal(url);
+    if (/^https?:|^mailto:/.test(url)) shell.openExternal(url);
     return { action: 'deny' };
   });
 
-  win.webContents.on('will-navigate', event => {
-    const targetUrl = event.url;
+  win.webContents.on('will-navigate', (event, targetUrl) => {
     if (!targetUrl.startsWith('file://')) {
       event.preventDefault();
-      shell.openExternal(targetUrl);
+      if (/^https?:|^mailto:/.test(targetUrl)) shell.openExternal(targetUrl);
     }
   });
 

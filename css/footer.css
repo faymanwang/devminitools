@@ -1,0 +1,3 @@
+/* The original mobile footer has 12px side margins and width:100%, causing overflow.
+   Limit this correction to footers carrying the new supporting links. */
+@media (max-width:640px){.dmt-footer{width:calc(100% - 24px)}}

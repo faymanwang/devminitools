@@ -1,9 +1,9 @@
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
+import { site, cleanManaged, enhancePage, enhanceLanding, buildSupportingPages, writeMetadata } from './site-content.mjs';
 
 const root = process.cwd();
-const baseUrl = 'https://devminitools.com';
-const lastModified = '2026-08-29';
+const baseUrl = site.url;
 
 const pages = {
     'json-format.html': {
@@ -97,6 +97,7 @@ const pages = {
 };
 
 const translations = {
+    '在线 JSON 美化与压缩工具': 'Online JSON Formatting and Minification',
     '数据仅在浏览器本地处理，不上传服务器': 'Data is processed locally in your browser and is never uploaded',
     'DevMiniTools 首页': 'DevMiniTools home',
     '工具导航': 'Tool navigation',
@@ -413,19 +414,21 @@ mkdirSync(join(root, 'en'), { recursive: true });
 
 for (const [file, config] of Object.entries(pages)) {
     const sourcePath = join(root, file);
-    let chinese = readFileSync(sourcePath, 'utf8');
+    let chinese = cleanManaged(readFileSync(sourcePath, 'utf8'));
     chinese = chinese.replaceAll('https://github.com/devminitools', 'https://github.com/faymanwang/devminitools');
     chinese = addSeo(chinese, file, config, 'zh');
     chinese = addPageTitle(chinese, config.zhH1);
     chinese = addLanguageSwitch(chinese, file, 'zh');
-    writeFileSync(sourcePath, chinese, 'utf8');
 
     let english = translateHtml(chinese);
     english = addSeo(english, file, config, 'en');
     english = addPageTitle(english, config.enH1);
     english = addLanguageSwitch(english, file, 'en');
     english = adjustEnglishPaths(english, file);
+    chinese = enhancePage(chinese, file, false);
+    english = enhancePage(english, `en/${file}`, true);
     assertEnglish(file, english);
+    writeFileSync(sourcePath, chinese, 'utf8');
     writeFileSync(join(root, 'en', file), english, 'utf8');
 }
 
@@ -456,7 +459,7 @@ const englishIndex = `<!DOCTYPE html>
 </body>
 </html>
 `;
-writeFileSync(join(root, 'en', 'index.html'), englishIndex, 'utf8');
+writeFileSync(join(root, 'en', 'index.html'), enhanceLanding(englishIndex, true), 'utf8');
 
 const rootIndex = `<!DOCTYPE html>
 <html lang="zh-CN">
@@ -488,18 +491,8 @@ const rootIndex = `<!DOCTYPE html>
 </body>
 </html>
 `;
-writeFileSync(join(root, 'index.html'), rootIndex, 'utf8');
+writeFileSync(join(root, 'index.html'), enhanceLanding(rootIndex, false), 'utf8');
 
-const sitemapEntries = Object.keys(pages).flatMap(file => {
-    const zhUrl = publicUrl(file, 'zh');
-    const enUrl = publicUrl(file, 'en');
-    return [
-        { loc: zhUrl, zhUrl, enUrl },
-        { loc: enUrl, zhUrl, enUrl }
-    ];
-});
-
-const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n  <url>\n    <loc>${baseUrl}/</loc>\n    <xhtml:link rel="alternate" hreflang="x-default" href="${baseUrl}/" />\n    <lastmod>${lastModified}</lastmod>\n  </url>\n  <url>\n    <loc>${baseUrl}/en/</loc>\n    <lastmod>${lastModified}</lastmod>\n  </url>\n${sitemapEntries.map(entry => `  <url>\n    <loc>${entry.loc}</loc>\n    <xhtml:link rel="alternate" hreflang="zh-CN" href="${entry.zhUrl}" />\n    <xhtml:link rel="alternate" hreflang="en" href="${entry.enUrl}" />\n    <xhtml:link rel="alternate" hreflang="x-default" href="${baseUrl}/" />\n    <lastmod>${lastModified}</lastmod>\n  </url>`).join('\n')}\n</urlset>\n`;
-writeFileSync(join(root, 'sitemap.xml'), sitemap, 'utf8');
-
-console.log(`Generated ${Object.keys(pages).length} English tool pages and bilingual SEO metadata.`);
+buildSupportingPages();
+writeMetadata();
+console.log("Generated 40 bilingual static pages and shared search metadata.");

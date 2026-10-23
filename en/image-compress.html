@@ -39,6 +39,8 @@
     }
     </script>
     <link rel="stylesheet" href="../css/style.css">
+
+<!-- dmt:footer-style --><link rel="stylesheet" href="../css/footer.css"><!-- /dmt:footer-style -->
 </head>
 <body class="tool-page">
     <header class="site-header">
@@ -158,15 +160,16 @@
                 <a href="image-gif.html">Images to GIF</a>
             </div>
         </section>
-    </main>
+<!-- dmt:tool-guide --><section class="section-block dmt-tool-note"><h2>Example and limitations</h2><p>JPEG fills transparent areas with white. PNG quality is not adjustable. Re-encoding can increase file size; compare the downloaded result.</p><a href="guides/image-compress.html">Image Compression: Dimensions, Formats and Transparency</a></section><!-- /dmt:tool-guide -->
+</main>
 
-    <footer class="site-footer">
+    <footer class="site-footer dmt-footer">
         <div class="footer-links">
             <a href="https://github.com/faymanwang/devminitools" target="_blank" rel="noopener">GitHub</a>
-        </div>
+<!-- dmt:footer --><a href="guides/index.html">Guides</a><a href="about.html">About</a><a href="contact.html">Contact</a><a href="privacy.html">Privacy</a><a href="credits.html">Open source</a><!-- /dmt:footer --></div>
     </footer>
-
-    <script src="../js/i18n.js"></script>
-    <script src="../js/image-compress.js"></script>
+<script src="../js/i18n.js"></script>
+<!-- dmt:safety --><script src="../js/input-safety.js"></script><!-- /dmt:safety -->
+<script src="../js/image-compress.js"></script>
 </body>
 </html>

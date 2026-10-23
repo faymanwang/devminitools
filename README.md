@@ -35,6 +35,8 @@ cd devminitools
 
 可以直接用浏览器打开 `index.html`，也可以使用任意静态文件服务器启动项目。
 
+本地预览使用 `npm run preview`，默认地址为 `http://127.0.0.1:4173`。它直接读取当前分支源码，不读取旧 `dist`，并支持线上使用的无扩展名地址。
+
 运行项目完整性检查：
 
 ```bash
@@ -42,7 +44,11 @@ npm run generate:i18n
 npm run check:site
 ```
 
-`generate:i18n` 会根据中文工具页重新生成 `en/` 下的英文页面、双语 SEO 元数据和 sitemap。修改页面文案或结构后，请先运行该命令，再运行站点检查。
+`generate:i18n` 会根据中文工具页和 `content/guides/zh`、`content/guides/en` 的成对 Markdown，生成双语页面、说明页面、页脚入口和搜索元数据。修改后请先生成，再检查。`npm test` 验证重复生成一致、main 原有页头及 CSS 不变，并覆盖精度、图片和 IPv6 边界。
+
+本次基线为 main 的 39fc952，保留 11 个工具及现有导航。新增样式分别限制于文章和页脚；详情见 [工具盘点](docs/TOOL_INVENTORY.md) 与 [发布清单](docs/RELEASE_CHECKLIST.md)。广告保持关闭。
+
+正式发布前运行 `npm run check:production`。联系渠道使用维护者提供的 faymanwang@gmail.com，Issues 保持关闭；缺少真实渠道时生产检查会失败。邮件实际收发需维护者自行验证。
 
 ## 桌面版
 
@@ -86,7 +92,7 @@ npm run dist:win
 
 ## 许可证
 
-[MIT](LICENSE)
+[Apache-2.0](LICENSE)。根许可证保留原文；原 MIT 标签与根文件不一致，现按实际根许可证修正。上游来源和第三方原文见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
 
 ## 参与贡献
 

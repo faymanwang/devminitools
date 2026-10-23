@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     let lastJson = null;
+    let hasParsedJson = false;
     let lastOutput = '';
     let autoFormatTimer = null;
     const isEnglish = document.documentElement.lang === 'en';
@@ -42,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!inputText) {
             throw new Error('请输入JSON数据');
         }
-        return JSON.parse(inputText);
+        return window.DevMiniToolsSafety.parseJson(inputText, document.documentElement.lang === 'en');
     }
 
     function setMessage(text, type) {
@@ -216,7 +217,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function renderCurrent(mode) {
-        if (lastJson === null) {
+        if (!hasParsedJson) {
             return;
         }
 
@@ -248,7 +249,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 throw new Error('请输入JSON数据');
             }
 
-            lastJson = JSON.parse(inputText);
+            lastJson = window.DevMiniToolsSafety.parseJson(inputText, document.documentElement.lang === 'en');
+            hasParsedJson = true;
 
             if (action === 'compress') {
                 outputMode.value = 'json';
@@ -263,6 +265,7 @@ document.addEventListener('DOMContentLoaded', function() {
             updateStats(lastJson, inputText);
         } catch (error) {
             lastJson = null;
+            hasParsedJson = false;
             const errorText = `错误：${locateJsonError(error, inputText)}`;
             setOutput(errorText, 'json-error-output');
             updateStats(null, inputText);
@@ -314,6 +317,10 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function downloadJson() {
+        if (jsonOutput.classList.contains('json-error-output')) {
+            setMessage(isEnglish ? 'Correct the JSON error before downloading.' : '请先修正 JSON 错误再下载。', 'error');
+            return;
+        }
         const text = lastOutput || jsonOutput.textContent;
         if (!text) {
             setMessage('没有可下载的内容。', 'error');
@@ -354,6 +361,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function clearAll() {
         jsonInput.value = '';
         lastJson = null;
+        hasParsedJson = false;
         lastOutput = '';
         setOutput('', 'json');
         setMessage('等待输入 JSON 数据。', '');
@@ -372,12 +380,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
         autoFormatTimer = window.setTimeout(() => {
             try {
-                lastJson = JSON.parse(inputText);
+                lastJson = window.DevMiniToolsSafety.parseJson(inputText, document.documentElement.lang === 'en');
+                hasParsedJson = true;
                 renderCurrent(outputMode.value);
                 updateStats(lastJson, inputText);
                 setMessage(isEnglish ? 'JSON formatted automatically.' : '已自动格式化。', 'success');
             } catch (error) {
                 lastJson = null;
+                hasParsedJson = false;
                 const errorText = `错误：${locateJsonError(error, inputText)}`;
                 setOutput(errorText, 'json-error-output');
                 updateStats(null, inputText);

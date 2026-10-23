@@ -1,0 +1,10 @@
+/* Only newly added article pages use these selectors. Existing tool layouts are untouched. */
+.dmt-article{max-width:940px;line-height:1.85;padding-bottom:32px}
+.dmt-article h1{font-size:clamp(26px,4vw,36px);margin:20px 0}
+.dmt-article h2{margin:28px 0 12px;font-size:23px}
+.dmt-article p,.dmt-article ul{margin:16px 0}
+.dmt-article ul{padding-left:24px}
+.dmt-article a{color:#175cd3}
+.dmt-article pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f2f4f7;border:1px solid #d0d5dd;border-radius:8px;padding:18px;color:#172033}
+.dmt-article pre code{color:inherit;background:transparent;text-shadow:none}
+@media(max-width:640px){.dmt-article{padding:18px}.dmt-article pre{padding:12px}}

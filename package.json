@@ -5,13 +5,19 @@
   "private": true,
   "main": "electron/main.js",
   "author": "faymanwang",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "scripts": {
     "start": "electron .",
     "generate:i18n": "node scripts/generate-i18n.mjs",
     "check:site": "node scripts/check-site.mjs",
     "dist": "electron-builder --publish never",
-    "dist:win": "electron-builder --win --x64 --publish never"
+    "dist:win": "electron-builder --win --x64 --publish never",
+    "preview": "node scripts/preview.mjs",
+    "test": "node --test --test-concurrency=1 tests/*.test.mjs",
+    "prestart": "npm run generate:i18n && npm run check:site",
+    "predist": "npm run generate:i18n && npm run check:site && npm test",
+    "predist:win": "npm run generate:i18n && npm run check:site && npm test",
+    "check:production": "node scripts/check-site.mjs --production"
   },
   "devDependencies": {
     "electron": "31.7.7",
@@ -36,7 +42,9 @@
       "robots.txt",
       "sitemap.xml",
       "LICENSE",
-      "README.md"
+      "README.md",
+      "guides/**/*.html",
+      "THIRD_PARTY_NOTICES.md"
     ],
     "win": {
       "target": [

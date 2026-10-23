@@ -1,0 +1,18 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>图片压缩：尺寸、格式与透明背景 - DevMiniTools</title><meta name="description" content="图片压缩：尺寸、格式与透明背景 — DevMiniTools 案例、说明与使用边界"><link rel="canonical" href="https://devminitools.com/guides/image-compress"><link rel="alternate" hreflang="zh-CN" href="https://devminitools.com/guides/image-compress"><link rel="alternate" hreflang="en" href="https://devminitools.com/en/guides/image-compress"><link rel="stylesheet" href="../css/style.css"><link rel="stylesheet" href="../css/content.css"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","name":"图片压缩：尺寸、格式与透明背景","url":"https://devminitools.com/guides/image-compress","inLanguage":"zh-CN","dateModified":"2026-10-23","author":{"@type":"Person","name":"faymanwang","url":"https://github.com/faymanwang/devminitools"}}</script>
+<!-- dmt:footer-style --><link rel="stylesheet" href="../css/footer.css"><!-- /dmt:footer-style -->
+</head><body class="tool-page"><header class="site-header"><a class="brand" href="../index.html"><span class="brand-dev">Dev</span><span class="brand-name">MiniTools</span></a><div class="language-switch" aria-label="语言选择"><a href="../en/guides/image-compress.html" lang="en">EN</a></div></header><main class="tool-shell dmt-article"><p><a href="../index.html">工具入口</a> / <a href="index.html">使用教程</a></p><h1>图片压缩：尺寸、格式与透明背景</h1><p>打开 <a href="../image-compress.html">图片压缩工具</a>。工具使用浏览器 Canvas 重新编码静态图片，不保证把任意文件压到某个固定体积。</p>
+<h2>用同一张原图比较</h2>
+<p><a href="../img/compression-sample.png">下载本教程的透明 PNG 原图</a>。它是 640 × 480 的合成测试图，包含渐变矩形和文字，四角透明。没有使用用户照片或需要转载授权的图片。</p>
+<p>实测环境：Windows，Chrome 155.0.8059.82，Canvas 编码，质量 80%。原图 PNG 为 192201 B，640 × 480。</p>
+<p>image/png, 640 × 480: 192201 B; RGBA(0,0) = 0, 0, 0, 0.</p>
+<p>image/jpeg, 640 × 480: 6523 B; RGBA(0,0) = 255, 255, 255, 255.</p>
+<p>image/webp, 640 × 480: 4126 B; RGBA(0,0) = 0, 0, 0, 0.</p>
+<p>image/webp, 320 × 240: 2062 B; RGBA(0,0) = 0, 0, 0, 0.</p>
+<p>选择原图，先清空最大宽高，再依次导出 PNG、JPEG 80% 和 WebP 80%。最后保持 WebP 80%，把最大宽度设为 320，下载并查看实际尺寸。每次都应比较输出文件，而不只看网页预览。</p>
+<h2>质量、尺寸和格式分别改变什么</h2>
+<p>PNG 导出不使用质量参数，主要通过缩小尺寸改变体积。JPEG 不支持透明，因此工具会填充白色背景。WebP 可以保留透明，但是否支持导出取决于浏览器；工具会核对实际输出类型，避免把回退的 PNG 误命名为 WebP。</p>
+<p>宽高限制保持原始比例，不放大图片。640 × 480 的原图限制到宽 320 后，应得到 320 × 240。质量滑块主要影响 JPEG 和 WebP 的有损编码，具体字节数依赖浏览器和图像内容。</p>
+<h2>失败和结果变大的情况</h2>
+<p>没有选择图片时应提示先选择文件。负数、零和非整数尺寸会被拒绝；失败后旧下载结果失效。损坏文件或超大图片可能受解码和设备内存限制。</p>
+<p>已经优化过的图片重新编码可能变大，页面会显示「增大」比例。PNG、WebP 的透明输出和 JPEG 的白底可在下载后检查。工具只处理静态单帧，不保证保留动画、EXIF、色彩配置或其他元数据；上传平台还可能再次编码。</p></main><footer class="site-footer dmt-footer"><div><strong>DevMiniTools</strong></div><div class="footer-links"><a href="https://github.com/faymanwang/devminitools" target="_blank" rel="noopener">GitHub</a>
+<!-- dmt:footer --><a href="index.html">使用教程</a><a href="../about.html">关于</a><a href="../contact.html">联系</a><a href="../privacy.html">隐私</a><a href="../credits.html">开源说明</a><!-- /dmt:footer --></div></footer></body></html>

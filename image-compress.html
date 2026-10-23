@@ -39,6 +39,8 @@
     }
     </script>
     <link rel="stylesheet" href="css/style.css">
+
+<!-- dmt:footer-style --><link rel="stylesheet" href="css/footer.css"><!-- /dmt:footer-style -->
 </head>
 <body class="tool-page">
     <header class="site-header">
@@ -158,14 +160,15 @@
                 <a href="image-gif.html">图片合成 GIF</a>
             </div>
         </section>
-    </main>
+<!-- dmt:tool-guide --><section class="section-block dmt-tool-note"><h2>案例与使用边界</h2><p>JPEG 会把透明区域填为白色；PNG 无质量参数。重新编码可能让文件更大，请比较下载结果。</p><a href="guides/image-compress.html">图片压缩：尺寸、格式与透明背景</a></section><!-- /dmt:tool-guide -->
+</main>
 
-    <footer class="site-footer">
+    <footer class="site-footer dmt-footer">
         <div class="footer-links">
             <a href="https://github.com/faymanwang/devminitools" target="_blank" rel="noopener">GitHub</a>
-        </div>
+<!-- dmt:footer --><a href="guides/index.html">使用教程</a><a href="about.html">关于</a><a href="contact.html">联系</a><a href="privacy.html">隐私</a><a href="credits.html">开源说明</a><!-- /dmt:footer --></div>
     </footer>
-
-    <script src="js/image-compress.js"></script>
+<!-- dmt:safety --><script src="js/input-safety.js"></script><!-- /dmt:safety -->
+<script src="js/image-compress.js"></script>
 </body>
 </html>

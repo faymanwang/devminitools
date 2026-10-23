@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const outputSize = document.getElementById('image-output-size');
     const outputDimension = document.getElementById('image-output-dimension');
 
+    let operation = 0;
     let sourceFile = null;
     let originalUrl = '';
     let convertedUrl = '';
@@ -58,6 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function resetOutput() {
+        operation++;
         revokeUrl(convertedUrl);
         convertedUrl = '';
         convertedBlob = null;
@@ -125,15 +127,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function canvasToBlob(canvas, mime, quality) {
-        return new Promise((resolve, reject) => {
-            canvas.toBlob((blob) => {
-                if (blob) {
-                    resolve(blob);
-                    return;
-                }
-                reject(new Error('当前浏览器无法导出该图片格式。'));
-            }, mime, quality);
-        });
+        return window.DevMiniToolsSafety.imageBlob(canvas, mime, quality, document.documentElement.lang === 'en');
     }
 
     function extensionForMime(mime) {
@@ -153,6 +147,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     async function handleFile(file) {
         if (!isSupportedImage(file)) {
+            resetAll();
             setMessage('请选择 JPEG、PNG、WebP 或 AVIF 图片。', 'error');
             return;
         }
@@ -174,11 +169,15 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
+        resetOutput();
+        const currentOperation = operation;
+        const selectedFile = sourceFile;
         convertBtn.disabled = true;
         setMessage('正在转换图片格式...');
 
         try {
-            const bitmap = await loadBitmap(sourceFile);
+            const bitmap = await loadBitmap(selectedFile);
+            if (currentOperation !== operation) { if (typeof bitmap.close === 'function') bitmap.close(); return; }
             const mime = outputFormat.value;
             const quality = Number(qualityInput.value) / 100;
             const canvas = document.createElement('canvas');
@@ -198,10 +197,11 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             const blob = await canvasToBlob(canvas, mime, mime === 'image/png' ? undefined : quality);
+            if (currentOperation !== operation) return;
             revokeUrl(convertedUrl);
             convertedBlob = blob;
             convertedUrl = URL.createObjectURL(blob);
-            convertedName = buildOutputName(sourceFile, mime);
+            convertedName = buildOutputName(selectedFile, mime);
 
             outputFormatText.textContent = mimeLabel(mime);
             outputSize.textContent = formatBytes(blob.size);
@@ -210,6 +210,7 @@ document.addEventListener('DOMContentLoaded', function() {
             downloadBtn.disabled = false;
             setMessage('格式转换完成，可以预览或下载结果。', 'success');
         } catch (error) {
+            if (currentOperation !== operation) return;
             setMessage(error && error.message ? error.message : '图片格式转换失败，请换一张图片重试。', 'error');
         } finally {
             convertBtn.disabled = false;

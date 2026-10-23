@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Free online JSON formatter to format, minify, copy and download JSON, with tree view and conversions to YAML, XML, TypeScript and Go Struct. All data stays in your browser.">
-    <title>JSON Formatter - Format and Minify JSON Online</title>
+    <meta name="description" content="Free online JSON formatter to format, minify, validate, copy and download JSON, with tree view and conversions to YAML, XML, TypeScript and Go Struct. All data stays in your browser.">
+    <title>JSON Formatter - Format, Minify and Validate JSON Online</title>
     <link rel="canonical" href="https://devminitools.com/en/json-format">
     <link rel="alternate" hreflang="zh-CN" href="https://devminitools.com/json-format">
     <link rel="alternate" hreflang="en" href="https://devminitools.com/en/json-format">
@@ -13,19 +13,19 @@
     <meta property="og:site_name" content="DevMiniTools">
     <meta property="og:locale" content="en_US">
     <meta property="og:locale:alternate" content="zh_CN">
-    <meta property="og:title" content="JSON Formatter - Format and Minify JSON Online">
-    <meta property="og:description" content="Free online JSON formatter to format, minify, copy and download JSON, with tree view and conversions to YAML, XML, TypeScript and Go Struct. All data stays in your browser.">
+    <meta property="og:title" content="JSON Formatter - Format, Minify and Validate JSON Online">
+    <meta property="og:description" content="Free online JSON formatter to format, minify, validate, copy and download JSON, with tree view and conversions to YAML, XML, TypeScript and Go Struct. All data stays in your browser.">
     <meta property="og:url" content="https://devminitools.com/en/json-format">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="JSON Formatter - Format and Minify JSON Online">
-    <meta name="twitter:description" content="Free online JSON formatter to format, minify, copy and download JSON, with tree view and conversions to YAML, XML, TypeScript and Go Struct. All data stays in your browser.">
+    <meta name="twitter:title" content="JSON Formatter - Format, Minify and Validate JSON Online">
+    <meta name="twitter:description" content="Free online JSON formatter to format, minify, validate, copy and download JSON, with tree view and conversions to YAML, XML, TypeScript and Go Struct. All data stays in your browser.">
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "WebApplication",
       "name": "Online JSON Formatter",
       "url": "https://devminitools.com/en/json-format",
-      "description": "Free online JSON formatter to format, minify, copy and download JSON, with tree view and conversions to YAML, XML, TypeScript and Go Struct. All data stays in your browser.",
+      "description": "Free online JSON formatter to format, minify, validate, copy and download JSON, with tree view and conversions to YAML, XML, TypeScript and Go Struct. All data stays in your browser.",
       "applicationCategory": "DeveloperApplication",
       "operatingSystem": "Any",
       "browserRequirements": "Requires JavaScript and a modern web browser",
@@ -40,6 +40,8 @@
     </script>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../vendor/highlight/atom-one-dark.min.css">
+
+<!-- dmt:footer-style --><link rel="stylesheet" href="../css/footer.css"><!-- /dmt:footer-style -->
 </head>
 <body class="tool-page json-page">
     <header class="site-header">
@@ -153,16 +155,18 @@
                 <a href="diff.html">JSON / Code Diff</a>
             </div>
         </section>
-    </main>
+<!-- dmt:tool-guide --><section class="section-block dmt-tool-note"><h2>Example and limitations</h2><p>Unsafe numeric identifiers are rejected to prevent precision loss. Keep IDs in quotes. Syntax validation does not validate business rules.</p><a href="guides/json-safety.html">JSON Validation, Tree View and Large Integer Safety</a></section><!-- /dmt:tool-guide -->
+</main>
 
-    <footer class="site-footer">
+    <footer class="site-footer dmt-footer">
         <div class="footer-links">
             <a href="https://github.com/faymanwang/devminitools" target="_blank" rel="noopener">GitHub</a>
-        </div>
+<!-- dmt:footer --><a href="guides/index.html">Guides</a><a href="about.html">About</a><a href="contact.html">Contact</a><a href="privacy.html">Privacy</a><a href="credits.html">Open source</a><!-- /dmt:footer --></div>
     </footer>
 
     <script src="../js/i18n.js"></script>
     <script src="../vendor/highlight/highlight.min.js"></script>
-    <script src="../js/script.js"></script>
+<!-- dmt:safety --><script src="../js/input-safety.js"></script><!-- /dmt:safety -->
+<script src="../js/script.js"></script>
 </body>
 </html>

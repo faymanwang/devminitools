@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="免费在线JSON格式化工具，支持JSON美化、压缩、复制、下载、树形查看、JSON转YAML、JSON转XML、JSON转TypeScript、JSON转Go Struct，所有数据仅在浏览器本地处理。">
-    <title>JSON格式化工具 - 在线JSON美化与压缩工具</title>
+    <meta name="description" content="免费在线JSON格式化工具，支持JSON美化、压缩、校验、复制、下载、树形查看、JSON转YAML、JSON转XML、JSON转TypeScript、JSON转Go Struct，所有数据仅在浏览器本地处理。">
+    <title>JSON格式化工具 - 在线JSON美化、压缩、校验工具</title>
     <link rel="canonical" href="https://devminitools.com/json-format">
     <link rel="alternate" hreflang="zh-CN" href="https://devminitools.com/json-format">
     <link rel="alternate" hreflang="en" href="https://devminitools.com/en/json-format">
@@ -13,19 +13,19 @@
     <meta property="og:site_name" content="DevMiniTools">
     <meta property="og:locale" content="zh_CN">
     <meta property="og:locale:alternate" content="en_US">
-    <meta property="og:title" content="JSON格式化工具 - 在线JSON美化与压缩工具">
-    <meta property="og:description" content="免费在线JSON格式化工具，支持JSON美化、压缩、复制、下载、树形查看、JSON转YAML、JSON转XML、JSON转TypeScript、JSON转Go Struct，所有数据仅在浏览器本地处理。">
+    <meta property="og:title" content="JSON格式化工具 - 在线JSON美化、压缩、校验工具">
+    <meta property="og:description" content="免费在线JSON格式化工具，支持JSON美化、压缩、校验、复制、下载、树形查看、JSON转YAML、JSON转XML、JSON转TypeScript、JSON转Go Struct，所有数据仅在浏览器本地处理。">
     <meta property="og:url" content="https://devminitools.com/json-format">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="JSON格式化工具 - 在线JSON美化与压缩工具">
-    <meta name="twitter:description" content="免费在线JSON格式化工具，支持JSON美化、压缩、复制、下载、树形查看、JSON转YAML、JSON转XML、JSON转TypeScript、JSON转Go Struct，所有数据仅在浏览器本地处理。">
+    <meta name="twitter:title" content="JSON格式化工具 - 在线JSON美化、压缩、校验工具">
+    <meta name="twitter:description" content="免费在线JSON格式化工具，支持JSON美化、压缩、校验、复制、下载、树形查看、JSON转YAML、JSON转XML、JSON转TypeScript、JSON转Go Struct，所有数据仅在浏览器本地处理。">
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "WebApplication",
       "name": "在线 JSON 格式化工具",
       "url": "https://devminitools.com/json-format",
-      "description": "免费在线JSON格式化工具，支持JSON美化、压缩、复制、下载、树形查看、JSON转YAML、JSON转XML、JSON转TypeScript、JSON转Go Struct，所有数据仅在浏览器本地处理。",
+      "description": "免费在线JSON格式化工具，支持JSON美化、压缩、校验、复制、下载、树形查看、JSON转YAML、JSON转XML、JSON转TypeScript、JSON转Go Struct，所有数据仅在浏览器本地处理。",
       "applicationCategory": "DeveloperApplication",
       "operatingSystem": "Any",
       "browserRequirements": "Requires JavaScript and a modern web browser",
@@ -40,6 +40,8 @@
     </script>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="vendor/highlight/atom-one-dark.min.css">
+
+<!-- dmt:footer-style --><link rel="stylesheet" href="css/footer.css"><!-- /dmt:footer-style -->
 </head>
 <body class="tool-page json-page">
     <header class="site-header">
@@ -153,15 +155,17 @@
                 <a href="diff.html">JSON/代码对比</a>
             </div>
         </section>
-    </main>
+<!-- dmt:tool-guide --><section class="section-block dmt-tool-note"><h2>案例与使用边界</h2><p>超出安全整数范围的数值会被拒绝，请将业务标识写成字符串。语法通过不代表符合业务规则。</p><a href="guides/json-safety.html">JSON 校验、树形查看与大整数精度</a></section><!-- /dmt:tool-guide -->
+</main>
 
-    <footer class="site-footer">
+    <footer class="site-footer dmt-footer">
         <div class="footer-links">
             <a href="https://github.com/faymanwang/devminitools" target="_blank" rel="noopener">GitHub</a>
-        </div>
+<!-- dmt:footer --><a href="guides/index.html">使用教程</a><a href="about.html">关于</a><a href="contact.html">联系</a><a href="privacy.html">隐私</a><a href="credits.html">开源说明</a><!-- /dmt:footer --></div>
     </footer>
 
     <script src="vendor/highlight/highlight.min.js"></script>
-    <script src="js/script.js"></script>
+<!-- dmt:safety --><script src="js/input-safety.js"></script><!-- /dmt:safety -->
+<script src="js/script.js"></script>
 </body>
 </html>

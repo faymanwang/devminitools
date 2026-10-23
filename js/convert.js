@@ -165,7 +165,7 @@ function convertToJava() {
             return;
         }
         
-        const jsonObj = JSON.parse(jsonInput);
+        const jsonObj = window.DevMiniToolsSafety.parseJson(jsonInput, document.documentElement.lang === 'en');
         const className = document.getElementById('class-name').value.trim() || 'Root';
         const packageName = document.getElementById('package-name').value.trim();
         
@@ -243,7 +243,7 @@ function convertToGolang() {
             return;
         }
         
-        const jsonObj = JSON.parse(jsonInput);
+        const jsonObj = window.DevMiniToolsSafety.parseJson(jsonInput, document.documentElement.lang === 'en');
         const structName = document.getElementById('class-name').value.trim() || 'Root';
         
         const parsed = parseJsonToClasses(jsonObj, structName, {});
@@ -297,7 +297,7 @@ function convertToRuby() {
             return;
         }
         
-        const jsonObj = JSON.parse(jsonInput);
+        const jsonObj = window.DevMiniToolsSafety.parseJson(jsonInput, document.documentElement.lang === 'en');
         const className = document.getElementById('class-name').value.trim() || 'Root';
         
         const parsed = parseJsonToClasses(jsonObj, className, {});
@@ -361,7 +361,7 @@ function convertToCSharp() {
             return;
         }
         
-        const jsonObj = JSON.parse(jsonInput);
+        const jsonObj = window.DevMiniToolsSafety.parseJson(jsonInput, document.documentElement.lang === 'en');
         const className = document.getElementById('class-name').value.trim() || 'Root';
         const namespace = document.getElementById('package-name').value.trim();
         
@@ -428,7 +428,7 @@ function convertToRust() {
             return;
         }
         
-        const jsonObj = JSON.parse(jsonInput);
+        const jsonObj = window.DevMiniToolsSafety.parseJson(jsonInput, document.documentElement.lang === 'en');
         const structName = document.getElementById('class-name').value.trim() || 'Root';
         
         const parsed = parseJsonToClasses(jsonObj, structName, {});
@@ -483,7 +483,7 @@ function convertToXML() {
             return;
         }
         
-        const jsonObj = JSON.parse(jsonInput);
+        const jsonObj = window.DevMiniToolsSafety.parseJson(jsonInput, document.documentElement.lang === 'en');
         const rootName = document.getElementById('class-name').value.trim() || 'root';
         
         const xml = jsonToXml(jsonObj, rootName);
@@ -535,7 +535,7 @@ function convertToYAML() {
             return;
         }
         
-        const jsonObj = JSON.parse(jsonInput);
+        const jsonObj = window.DevMiniToolsSafety.parseJson(jsonInput, document.documentElement.lang === 'en');
         const yaml = jsonToYaml(jsonObj, 0);
         displayResult(yaml, 'yaml');
     } catch (error) {

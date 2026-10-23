@@ -1,3 +1,5 @@
+// Resolve against this shared script, not the localized page URL.
+const gifWorkerScript = new URL('../vendor/gif.js/gif.worker.js', document.currentScript.src).href;
 document.addEventListener('DOMContentLoaded', function() {
     const fileInput = document.getElementById('gif-files');
     const dropZone = document.getElementById('gif-drop-zone');
@@ -87,7 +89,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const width = Math.max(1, Math.round(first.naturalWidth * scale)); const height = Math.max(1, Math.round(first.naturalHeight * scale));
             const canvas = document.createElement('canvas'); canvas.width = width; canvas.height = height;
             const context = canvas.getContext('2d');
-            const gif = new GIF({ workers: Math.min(2, navigator.hardwareConcurrency || 1), quality: Number(qualityInput.value), width, height, repeat: loopInput.checked ? 0 : -1, workerScript: 'vendor/gif.js/gif.worker.js' });
+            const gif = new GIF({ workers: Math.min(2, navigator.hardwareConcurrency || 1), quality: Number(qualityInput.value), width, height, repeat: loopInput.checked ? 0 : -1, workerScript: gifWorkerScript });
             images.forEach((image) => {
                 const ratio = Math.min(width / image.naturalWidth, height / image.naturalHeight);
                 const drawWidth = Math.round(image.naturalWidth * ratio); const drawHeight = Math.round(image.naturalHeight * ratio);

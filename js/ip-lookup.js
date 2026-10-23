@@ -20,18 +20,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function isIpv6(ip) {
-        if (!ip.includes(':')) return false;
-        if (!/^[0-9a-fA-F:.]+$/.test(ip)) return false;
-        try {
-            const parts = ip.split('::');
-            if (parts.length > 2) return false;
-            const left = parts[0] ? parts[0].split(':') : [];
-            const right = parts[1] ? parts[1].split(':') : [];
-            const groups = [...left, ...right].filter(Boolean);
-            return groups.length <= 8 && groups.every(group => /^[0-9a-fA-F]{1,4}$/.test(group));
-        } catch (error) {
-            return false;
-        }
+        if (!ip.includes(':') || /[%[\]\s]/.test(ip)) return false;
+        try { return new URL('http://[' + ip + ']/').hostname.startsWith('['); } catch { return false; }
     }
 
     function ipv4Type(nums) {

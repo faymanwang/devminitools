@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const savedRatio = document.getElementById('image-saved-ratio');
     const outputDimension = document.getElementById('image-output-dimension');
 
+    let operation = 0;
     let sourceFile = null;
     let originalUrl = '';
     let compressedUrl = '';
@@ -49,6 +50,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function resetOutput() {
+        operation++;
         revokeUrl(compressedUrl);
         compressedUrl = '';
         compressedBlob = null;
@@ -108,26 +110,11 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function calculateTargetSize(width, height) {
-        const maxWidth = Number(maxWidthInput.value) || width;
-        const maxHeight = Number(maxHeightInput.value) || height;
-        const ratio = Math.min(1, maxWidth / width, maxHeight / height);
-
-        return {
-            width: Math.max(1, Math.round(width * ratio)),
-            height: Math.max(1, Math.round(height * ratio))
-        };
+        return window.DevMiniToolsSafety.dimensions(width, height, maxWidthInput.value, maxHeightInput.value, document.documentElement.lang === 'en');
     }
 
     function canvasToBlob(canvas, mime, quality) {
-        return new Promise((resolve, reject) => {
-            canvas.toBlob((blob) => {
-                if (blob) {
-                    resolve(blob);
-                    return;
-                }
-                reject(new Error('当前浏览器无法导出该图片格式。'));
-            }, mime, quality);
-        });
+        return window.DevMiniToolsSafety.imageBlob(canvas, mime, quality, document.documentElement.lang === 'en');
     }
 
     function extensionForMime(mime) {
@@ -147,6 +134,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     async function handleFile(file) {
         if (!isSupportedImage(file)) {
+            resetAll();
             setMessage('请选择 JPEG、PNG、WebP 或 AVIF 图片。', 'error');
             return;
         }
@@ -166,12 +154,16 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
+        resetOutput();
+        const currentOperation = operation;
+        const selectedFile = sourceFile;
         compressBtn.disabled = true;
         setMessage('正在压缩图片...');
 
         try {
-            const bitmap = await loadBitmap(sourceFile);
+            const bitmap = await loadBitmap(selectedFile);
             const target = calculateTargetSize(bitmap.width, bitmap.height);
+            if (currentOperation !== operation) { if (typeof bitmap.close === 'function') bitmap.close(); return; }
             const mime = outputFormat.value;
             const quality = Number(qualityInput.value) / 100;
             const canvas = document.createElement('canvas');
@@ -191,19 +183,21 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             const blob = await canvasToBlob(canvas, mime, mime === 'image/png' ? undefined : quality);
+            if (currentOperation !== operation) return;
             revokeUrl(compressedUrl);
             compressedBlob = blob;
             compressedUrl = URL.createObjectURL(blob);
-            compressedName = buildOutputName(sourceFile, mime);
+            compressedName = buildOutputName(selectedFile, mime);
 
-            const saved = sourceFile.size > 0 ? (1 - blob.size / sourceFile.size) * 100 : 0;
+            const saved = selectedFile.size > 0 ? (1 - blob.size / selectedFile.size) * 100 : 0;
             outputSize.textContent = formatBytes(blob.size);
             savedRatio.textContent = saved >= 0 ? `${saved.toFixed(1)}%` : `增大 ${Math.abs(saved).toFixed(1)}%`;
             outputDimension.textContent = `${target.width} x ${target.height}`;
             setPreview(compressedPreview, compressedUrl, '压缩图片预览');
             downloadBtn.disabled = false;
-            setMessage('压缩完成，可以预览或下载结果。', 'success');
+            setMessage(saved < 0 ? (document.documentElement.lang === 'en' ? 'Re-encoding complete. The result is larger than the original.' : '重新编码完成，结果比原图更大，请比较后下载。') : '压缩完成，可以预览或下载结果。', 'success');
         } catch (error) {
+            if (currentOperation !== operation) return;
             setMessage(error && error.message ? error.message : '图片压缩失败，请换一张图片重试。', 'error');
         } finally {
             compressBtn.disabled = false;
